@@ -6,7 +6,10 @@ const val hiltVersion = "2.33-beta"
 object DepsCatalog {
     private object Versions {
         const val junit = "5.6.2"
+        const val lombok = "1.18.20"
     }
     const val junitApi = "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
     const val junitEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
+
+    const val lombok = "org.projectlombok:lombok:${Versions.lombok}"
 }

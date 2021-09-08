@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    compileOnly(DepsCatalog.lombok)
+
     testImplementation(DepsCatalog.junitApi)
     testRuntimeOnly(DepsCatalog.junitEngine)
 }
