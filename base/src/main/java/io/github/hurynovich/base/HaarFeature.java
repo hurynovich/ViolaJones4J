@@ -13,8 +13,8 @@ public final class HaarFeature {
 
     Value calcValue(IntegralImg iImg) {
         int result = 0;
-        for (Rect r : positive) result += iImg.getValue(r);
-        for (Rect r : negative) result -= iImg.getValue(r);
+        for (Rect r : positive) result += iImg.getSum(r);
+        for (Rect r : negative) result -= iImg.getSum(r);
 
         return new Value(result);
     }
