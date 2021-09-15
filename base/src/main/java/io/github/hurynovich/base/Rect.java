@@ -6,6 +6,27 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public final class Rect {
-    private final Int2D a;
-    private final Int2D b;
+    public final Int2D a;
+    public final Int2D b;
+
+    public Rect(int x1, int y1, int x2, int y2){
+        a = new Int2D(x1, y1);
+        b = new Int2D(x2, y2);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        sb.append(a.x).append(", ");
+        sb.append(a.y).append(", ");
+        sb.append(b.x).append(", ");
+        sb.append(b.y).append(")");
+
+        return sb.toString();
+    }
+
+    public Rect translate(Int2D shift) {
+        return new Rect(a.plus(shift), b.plus(shift));
+    }
 }

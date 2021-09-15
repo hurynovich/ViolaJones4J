@@ -1,5 +1,8 @@
 package io.github.hurynovich.base;
 
+import java.awt.image.BufferedImage;
+import java.util.function.IntUnaryOperator;
+
 import static io.github.hurynovich.base.Utils.calcGrayValue;
 
 public class IntegralImg {
@@ -7,19 +10,33 @@ public class IntegralImg {
     private final int width;
     private final int  height;
 
-    public int getValue(Int2D point){
+    public final int getValue(Int2D point){
         return data[point.y][point.x];
     }
     public int getValue(int x, int y){
         return data[y][x];
     }
-    public int getSum(Rect rect){
-        return 0;
+
+    public int getSum(int x1, int y1, int x2, int y2){
+        try {
+            int one = getValue(x1, y1);
+            int four = getValue(x2, y2);
+            int three = getValue(x1, y2);
+            int two = getValue(x2, y1);
+            return one + four - two - three;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public int getSum(Rect area){
+        return getSum(area.a.x, area.a.y, area.b.x, area.b.y);
     }
     public int getWidth(){return width;}
     public int getHigh(){return height;}
 
-    IntegralImg(Image img){
+
+    IntegralImg(BufferedImage img, IntUnaryOperator pixelValCalculator){
         //allocate array to store integral image
         width = img.getWidth();
         height = img.getHeight();
@@ -29,21 +46,34 @@ public class IntegralImg {
         }
 
         //initialize first row and first column of integral image
-        data[0][0] = calcGrayValue(img.getRGB(0, 0));
+        data[0][0] = pixelValCalculator.applyAsInt(img.getRGB(0, 0));
         for (int x = 1; x < width; x++){
-            data[0][x] = data[0][x - 1] + calcGrayValue(img.getRGB(x, 0));
+            data[0][x] = data[0][x - 1] + pixelValCalculator.applyAsInt(img.getRGB(x, 0));
         }
         for (int y = 1; y < height; y++){
-            data[y][0] = data[y - 1][0] + calcGrayValue(img.getRGB(0, y));
+            data[y][0] = data[y - 1][0] + pixelValCalculator.applyAsInt(img.getRGB(0, y));
         }
 
         //initialize the rest of integral image
         for (int y = 1; y < height; y++){
-            int rowSum = calcGrayValue(img.getRGB(0, y));
+            int rowSum = pixelValCalculator.applyAsInt(img.getRGB(0, y));
             for (int x = 1; x < width; x++){
-                rowSum += calcGrayValue(img.getRGB(x, y));
+                rowSum += pixelValCalculator.applyAsInt(img.getRGB(x, y));
                 data[y][x] = data[y-1][x] + rowSum;
             }
         }
+    }
+
+    public static IntegralImg newIntegralImg(BufferedImage img) {
+        return new IntegralImg(img, Utils::luminance);
+    }
+
+    public static IntegralImg newSquaredIntegralImg(BufferedImage img) {
+
+        IntUnaryOperator f = (int rgb) -> {
+            int gray = calcGrayValue(rgb);
+            return gray * gray;
+        };
+        return new IntegralImg(img, f);
     }
 }

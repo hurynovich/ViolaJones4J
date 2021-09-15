@@ -1,18 +1,35 @@
 package io.github.hurynovich.base;
 
+import lombok.AllArgsConstructor;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+class StrongHaarClassifier {
+    private final List<WeakHaarClassifier> weakClassifiers;
+    private final double threshold;
 
-public class StrongHaarClassifier {
-    private double threshold;
-    private List<WeakHaarClassifier> weakClassifiers = new ArrayList<>();
-
-    public boolean doDetection(Image image){
+    /**
+     *
+     * @param integralImg
+     * @param valueFactor
+     * @param pos
+     * @return {@code true} if object was detected; otherwise {@code false}.
+     *
+     */
+    public boolean detect(IntegralImg integralImg, double valueFactor, Int2D pos){
         double sumValue = 0;
         for (var classifier : weakClassifiers){
-            sumValue += classifier.calcValue(image);
+            var val = classifier.calcValue(integralImg, pos);
+            sumValue += val;
         }
-        return sumValue < threshold;
+
+        //TODO check unequation direction
+        var result = sumValue * valueFactor < threshold;
+        return  result;
     }
+
 }

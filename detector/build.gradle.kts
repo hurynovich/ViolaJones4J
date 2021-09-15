@@ -11,6 +11,10 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":base"))
+
+    implementation(DepsCatalog.picocli)
+
     testImplementation(DepsCatalog.junitApi)
     testRuntimeOnly(DepsCatalog.junitEngine)
 }

@@ -1,21 +1,27 @@
 package io.github.hurynovich.base;
 
+import lombok.AllArgsConstructor;
+
+import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 public final class HaarFeature {
-    private final Rect[] positive;
-    private final Rect[] negative;
+    private final List<Part> parts;
 
-    HaarFeature(Set<Rect> positive, Set<Rect> negative){
-        this.positive = positive.toArray(new Rect[]{});
-        this.negative = negative.toArray(new Rect[]{});
+    double calcValue(IntegralImg iImg, Int2D shift) {
+        int result = 0;
+        for (Part p : parts) {
+            var val = iImg.getSum(p.area.translate(shift));
+            result += val * p.factor;
+        }
+
+        return result;
     }
 
-    Value calcValue(IntegralImg iImg) {
-        int result = 0;
-        for (Rect r : positive) result += iImg.getSum(r);
-        for (Rect r : negative) result -= iImg.getSum(r);
-
-        return new Value(result);
+    @AllArgsConstructor
+    static class Part {
+        public final Rect area;
+        public final double factor;
     }
 }
