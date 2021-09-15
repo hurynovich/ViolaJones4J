@@ -79,7 +79,17 @@ public class DetectorCliApp implements Callable<Integer> {
         log.log(INFO, "Detecting objects.");
         var result = d.detect(loadImage(imageFile));
 
-        log.log(INFO, "Preparing result.");
+        if(result.isEmpty()) {
+            log.log(INFO, "Objects were not detected.");
+            return 0;
+        }
+
+        log.log(INFO, "Printing result.");
+        for (Rect rect: result) {
+            System.out.println(rect);
+        }
+
+        log.log(INFO, "Preparing result image.");
         BufferedImage img = loadImage(imageFile);
         for (Rect rect: result) {
             Utils.drawRectangle(img, rect, Color.RED);
@@ -91,9 +101,6 @@ public class DetectorCliApp implements Callable<Integer> {
                 )
         );
 
-        if(result.isEmpty()) {
-            log.log(INFO, "Objects were not detected.");
-        }
 
         return 0;
     }

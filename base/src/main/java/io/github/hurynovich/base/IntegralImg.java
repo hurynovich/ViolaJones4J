@@ -20,9 +20,9 @@ public class IntegralImg {
     public int getSum(int x1, int y1, int x2, int y2){
         try {
             int one = getValue(x1, y1);
-            int four = getValue(x2, y2);
-            int three = getValue(x1, y2);
             int two = getValue(x2, y1);
+            int three = getValue(x1, y2);
+            int four = getValue(x2, y2);
             return one + four - two - three;
         } catch (Exception e) {
             return 0;
@@ -38,28 +38,28 @@ public class IntegralImg {
 
     IntegralImg(BufferedImage img, IntUnaryOperator pixelValCalculator){
         //allocate array to store integral image
-        width = img.getWidth();
-        height = img.getHeight();
+        width = img.getWidth() + 1;
+        height = img.getHeight() + 1;
         data = new int[height][];
         for(int i = 0; i < data.length; i++){
             data[i] = new int[width];
         }
 
         //initialize first row and first column of integral image
-        data[0][0] = pixelValCalculator.applyAsInt(img.getRGB(0, 0));
+        data[1][1] = pixelValCalculator.applyAsInt(img.getRGB(0, 0));
         for (int x = 1; x < width; x++){
-            data[0][x] = data[0][x - 1] + pixelValCalculator.applyAsInt(img.getRGB(x, 0));
+            data[1][x] = data[1][x - 1] + pixelValCalculator.applyAsInt(img.getRGB(x - 1, 0));
         }
         for (int y = 1; y < height; y++){
-            data[y][0] = data[y - 1][0] + pixelValCalculator.applyAsInt(img.getRGB(0, y));
+            data[y][1] = data[y - 1][1] + pixelValCalculator.applyAsInt(img.getRGB(0, y - 1));
         }
 
         //initialize the rest of integral image
-        for (int y = 1; y < height; y++){
+        for (int y = 1; y < height - 1; y++){
             int rowSum = pixelValCalculator.applyAsInt(img.getRGB(0, y));
-            for (int x = 1; x < width; x++){
+            for (int x = 1; x < width - 1; x++){
                 rowSum += pixelValCalculator.applyAsInt(img.getRGB(x, y));
-                data[y][x] = data[y-1][x] + rowSum;
+                data[y+1][x+1] = data[y][x+1] + rowSum;
             }
         }
     }
@@ -71,7 +71,7 @@ public class IntegralImg {
     public static IntegralImg newSquaredIntegralImg(BufferedImage img) {
 
         IntUnaryOperator f = (int rgb) -> {
-            int gray = calcGrayValue(rgb);
+            int gray = Utils.luminance(rgb);
             return gray * gray;
         };
         return new IntegralImg(img, f);

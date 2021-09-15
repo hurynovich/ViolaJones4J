@@ -13,18 +13,18 @@ public class CascadeClassifierDetector implements Detector {
     @Override
     public List<Rect> detect(BufferedImage img) {
         IntegralImg ii = IntegralImg.newIntegralImg(img);
-        for (int y = 0; y < ii.getWidth(); y++){
-            for (int x = 0; x < ii.getHigh(); x++){
+        for (int y = 0; y < ii.getHigh(); y++){
+            for (int x = 0; x < ii.getWidth(); x++){
                 System.out.printf("%5d ", ii.getValue(x, y));
             }
             System.out.println();
         }
-        IntegralImg squaredIi = IntegralImg.newSquaredIntegralImg(img);
+        IntegralImg sqIi = IntegralImg.newSquaredIntegralImg(img);
         SlidingWindow slider = new SlidingWindow(new Int2D(img.getWidth(), img.getHeight()), cascade.getWindowSize());
         List<Rect> result = new ArrayList<>();
         Int2D pos;
         while ((pos = slider.next()) != null) {
-            double valueFactor = calcValueFactor(ii, squaredIi, pos, cascade.getWindowSize());
+            double valueFactor = calcValueFactor(ii, sqIi, pos, cascade.getWindowSize());
             if(cascade.detect(ii, valueFactor, pos)) {
                 result.add(new Rect(pos, pos.plus(cascade.getWindowSize())));
             }
@@ -34,14 +34,19 @@ public class CascadeClassifierDetector implements Detector {
     }
 
     private double calcValueFactor(IntegralImg ii, IntegralImg sqIi, Int2D pos, Int2D winSize) {
-        if(1==1){return 1;}
+//        if(1==1){return 1;}
 
-        var window = new Rect(pos, pos.plus(winSize));
-        int valSum = ii.getSum(window); //CALC_SUM_OFS(nofs, pwinPtr);
-        int valSqSum = sqIi.getSum (window);
+        var normWin = new Rect(
+                pos.x + 1,
+                pos.y + 1,
+                pos.x + winSize.x - 1,
+                pos.y + winSize.y -1
+        );
+        int valSum = ii.getSum(normWin); //CALC_SUM_OFS(nofs, pwinPtr);
+        int valSqSum = sqIi.getSum (normWin);
 
         //площадь окна меньшего на 1 px по краю
-        double winArea = winSize.x * winSize.y;
+        int winArea = normWin.area();
         double nf = (winArea * valSqSum) - (valSum * valSum);
 
         if (nf > 0) {

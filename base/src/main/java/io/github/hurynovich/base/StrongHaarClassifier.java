@@ -23,12 +23,12 @@ class StrongHaarClassifier {
     public boolean detect(IntegralImg integralImg, double valueFactor, Int2D pos){
         double sumValue = 0;
         for (var classifier : weakClassifiers){
-            var val = classifier.calcValue(integralImg, pos);
+            var val = classifier.calcValue(integralImg, valueFactor, pos);
             sumValue += val;
         }
 
         //TODO check unequation direction
-        var result = sumValue * valueFactor < threshold;
+        var result = sumValue > threshold;
         return  result;
     }
 

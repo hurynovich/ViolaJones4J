@@ -25,7 +25,7 @@ public class SlidingWindow {
         this.x = -xStep;
     }
     public SlidingWindow(Int2D imageSize, Int2D detectorSize){
-        this(imageSize, detectorSize, 1, 1);
+        this(imageSize, detectorSize, 2, 2);
     }
 
     public Int2D next(){

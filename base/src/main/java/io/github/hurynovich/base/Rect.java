@@ -14,6 +14,10 @@ public final class Rect {
         b = new Int2D(x2, y2);
     }
 
+    public int area(){
+        return (b.x - a.x) * (b.y - a.y);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
