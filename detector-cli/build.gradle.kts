@@ -9,6 +9,8 @@ java {
 
 application {
     mainClass.set("io.github.hurynovich.vj4j.detector.cli.DetectorApp")
+    mainModule.set("vj4j.detector.cli")
+    applicationName = "vj4j-detector"
 }
 
 dependencies {
