@@ -1,6 +1,5 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.base;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.List;
 

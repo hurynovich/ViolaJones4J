@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv;
 
-import io.github.hurynovich.base.Detector;
-import io.github.hurynovich.base.DetectorLoader;
+import io.github.hurynovich.vj4j.base.Detector;
+import io.github.hurynovich.vj4j.base.DetectorLoader;
 
 import javax.xml.parsers.SAXParserFactory;
 import java.nio.file.Files;

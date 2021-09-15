@@ -1,9 +1,7 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.base;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 public final class Utils {
 

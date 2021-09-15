@@ -1,4 +1,4 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.base;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

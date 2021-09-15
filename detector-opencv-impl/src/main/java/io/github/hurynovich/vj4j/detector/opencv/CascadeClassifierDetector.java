@@ -1,6 +1,9 @@
 package io.github.hurynovich.vj4j.detector.opencv;
 
 import io.github.hurynovich.base.*;
+import io.github.hurynovich.vj4j.base.Detector;
+import io.github.hurynovich.vj4j.base.Int2D;
+import io.github.hurynovich.vj4j.base.Rect;
 import lombok.AllArgsConstructor;
 
 import java.awt.image.BufferedImage;

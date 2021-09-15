@@ -1,9 +1,7 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.awt.*;
 
 @AllArgsConstructor
 @Getter

@@ -1,8 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv;
 
-import io.github.hurynovich.base.Int2D;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import io.github.hurynovich.vj4j.base.Int2D;
 
 //TODO add validation for constructor args
 public class SlidingWindow {

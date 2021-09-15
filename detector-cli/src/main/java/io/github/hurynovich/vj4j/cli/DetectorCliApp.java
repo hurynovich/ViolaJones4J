@@ -1,9 +1,9 @@
-package io.github.hurynovich.violajones;
+package io.github.hurynovich.vj4j.cli;
 
-import io.github.hurynovich.base.Detector;
-import io.github.hurynovich.base.DetectorLoader;
-import io.github.hurynovich.base.Rect;
-import io.github.hurynovich.base.Utils;
+import io.github.hurynovich.vj4j.base.Detector;
+import io.github.hurynovich.vj4j.base.DetectorLoader;
+import io.github.hurynovich.vj4j.base.Rect;
+import io.github.hurynovich.vj4j.base.Utils;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -18,7 +18,6 @@ import java.nio.file.Path;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 
-import static io.github.hurynovich.violajones.OutputFormat.TEXT;
 import static java.lang.System.Logger.Level.INFO;
 
 @CommandLine.Command(
@@ -54,7 +53,7 @@ public class DetectorCliApp implements Callable<Integer> {
     private Integer maxObjectHeight;
 
     @Option(names = {"--output-format"})
-    private OutputFormat outputFormat = TEXT;
+    private OutputFormat outputFormat = OutputFormat.TEXT;
 
     @Option(
             names = {"--output-directory"},

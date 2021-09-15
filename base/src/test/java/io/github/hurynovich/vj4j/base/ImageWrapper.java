@@ -1,7 +1,6 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.base;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 
 class ImageWrapper implements Image {
     private final BufferedImage data;

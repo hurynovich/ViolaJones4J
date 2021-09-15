@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv;
 
-import io.github.hurynovich.base.Detector;
+import io.github.hurynovich.vj4j.base.Detector;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
