@@ -15,14 +15,14 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger.Level;
 import java.nio.file.Path;
+import java.util.ResourceBundle;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 
 import static java.lang.System.Logger.Level.INFO;
 
 @CommandLine.Command(
-        name = "vj4j-detect",
-        description = "Detects objects on given image."
+        name = "vj4j-detect"
 )
 public class DetectorApp implements Callable<Integer> {
     private static System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
@@ -62,11 +62,14 @@ public class DetectorApp implements Callable<Integer> {
     )
     private File outputDir;
 
-    @Option(names = { "-h", "--help" }, usageHelp = true, description = "Display a help message.")
-    private boolean helpRequested = false;
-
-    @Option(names = { "--log-level" }, description = "Display execution information. ")
+    @Option(names = { "--log-level" }, descriptionKey = "description.log-level")
     private Level logLevel;
+
+    @Option(names = { "-h", "--help" }, usageHelp = true, description = "Display a help message.")
+    private boolean helpRequested;
+
+    @Option(names = { "--version" }, versionHelp = true, description = "Display version information.")
+    private boolean versionRequested;
 
     @Override
     public Integer call() throws Exception {
@@ -133,7 +136,9 @@ public class DetectorApp implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new DetectorApp()).execute(args);
+        CommandLine cmd = new CommandLine(new DetectorApp());
+        cmd.setResourceBundle(ResourceBundle.getBundle("/Messages"));
+        int exitCode = cmd.execute(args);
         System.exit(exitCode);
     }
 }
