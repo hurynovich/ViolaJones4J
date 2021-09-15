@@ -1,12 +1,15 @@
 package io.github.hurynovich.base;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+
 public class IntegralImgImplTest {
     @Test
+    @Disabled
     void testImageReading() throws Exception {
         BufferedImage img = ImageIO.read(IntegralImgImplTest.class.getResourceAsStream("/test-image.png"));
 
@@ -24,6 +27,7 @@ public class IntegralImgImplTest {
     }
 
     @Test
+    @Disabled
     void testIntegralImageInitialization() {
         BufferedImage srcImg = new BufferedImage(4,3, BufferedImage.TYPE_INT_RGB);
         srcImg.getRaster().setPixel(0,0, new int[]{2,2,2});
@@ -53,6 +57,7 @@ public class IntegralImgImplTest {
     }
 
     @Test
+    @Disabled
     void testIntegralImageAreaValue() {
         BufferedImage srcImg = new BufferedImage(4,3, BufferedImage.TYPE_INT_RGB);
         srcImg.getRaster().setPixel(0,0, new int[]{2,2,2});
