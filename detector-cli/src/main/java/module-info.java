@@ -6,7 +6,7 @@ module vj4j.detector.cli {
     requires vj4j.base;
     requires vj4j.detector.opencv.impl;
 
-    opens io.github.hurynovich.vj4j.cli to info.picocli;
+    opens io.github.hurynovich.vj4j.detector.cli to info.picocli;
 
     uses DetectorLoader;
 }

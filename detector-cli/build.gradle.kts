@@ -8,7 +8,7 @@ java {
 }
 
 application {
-    mainClass.set("io.github.hurynovich.violajones.DetectorCliApp")
+    mainClass.set("io.github.hurynovich.vj4j.detector.cli.DetectorApp")
 }
 
 dependencies {

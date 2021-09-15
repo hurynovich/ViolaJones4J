@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.cli;
+package io.github.hurynovich.vj4j.detector.cli;
 
 import io.github.hurynovich.vj4j.base.Detector;
 import io.github.hurynovich.vj4j.base.DetectorLoader;
@@ -24,8 +24,8 @@ import static java.lang.System.Logger.Level.INFO;
         name = "vj4j-detect",
         description = "Detects objects on given image."
 )
-public class DetectorCliApp implements Callable<Integer> {
-    private static System.Logger log = System.getLogger(DetectorCliApp.class.getCanonicalName());
+public class DetectorApp implements Callable<Integer> {
+    private static System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
 
     @Parameters(
             paramLabel = "image-file",
@@ -133,7 +133,7 @@ public class DetectorCliApp implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new DetectorCliApp()).execute(args);
+        int exitCode = new CommandLine(new DetectorApp()).execute(args);
         System.exit(exitCode);
     }
 }
