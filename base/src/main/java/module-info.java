@@ -1,4 +1,4 @@
-module viola.jones.base {
+module vj4j.base {
     requires java.desktop;
     requires static lombok;
 

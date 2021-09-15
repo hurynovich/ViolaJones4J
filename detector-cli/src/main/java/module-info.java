@@ -1,7 +1,7 @@
-module viola.jones.detector.main {
+module vj4j.detector.cli {
     requires java.desktop;
     requires info.picocli;
-    requires viola.jones.base;
+    requires vj4j.base;
 
     opens io.github.hurynovich.violajones to info.picocli;
 }
