@@ -40,23 +40,23 @@ public class DetectorCliApp implements Callable<Integer> {
     )
     private Path cascadeFile;
 
-    @Option(names = {"--min-window-x"})
-    private Integer minWindowSizeX;
+    @Option(names = {"--min-object-width"})
+    private Integer minObjectWidth;
 
-    @Option(names = {"--max-window-x"})
-    private Integer maxWindowSizeX;
+    @Option(names = {"--max-object-width"})
+    private Integer maxObjectWidth;
 
-    @Option(names = {"--min-window-y"})
-    private Integer minWindowSizeY;
+    @Option(names = {"--min-object-height"})
+    private Integer minObjectHeight;
 
-    @Option(names = {"--max-window-y"})
-    private Integer maxWindowSizeY;
+    @Option(names = {"--max-object-height"})
+    private Integer maxObjectHeight;
 
     @Option(names = {"--output-format"})
     private OutputFormat outputFormat = TEXT;
 
     @Option(
-            names = {"-d", "--output-directory"},
+            names = {"--output-directory"},
             description = "Path to directory where results of detection will be stored. " +
                     "If it is empty then results will be printed to program standard output."
     )
@@ -100,7 +100,6 @@ public class DetectorCliApp implements Callable<Integer> {
                 "detected_" + imageFile.getName()
                 )
         );
-
 
         return 0;
     }
