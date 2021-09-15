@@ -1,14 +1,13 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import io.github.hurynovich.base.Detector;
+import io.github.hurynovich.base.DetectorLoader;
 
 import javax.xml.parsers.SAXParserFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class OpenCvCascadeLoader implements DetectorLoader{
+public class OpenCvCascadeLoader implements DetectorLoader {
     private SAXParserFactory factory = SAXParserFactory.newInstance();
 
     @Override

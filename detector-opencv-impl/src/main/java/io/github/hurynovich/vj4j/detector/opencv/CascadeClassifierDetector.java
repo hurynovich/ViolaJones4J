@@ -1,5 +1,6 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
+import io.github.hurynovich.base.*;
 import lombok.AllArgsConstructor;
 
 import java.awt.image.BufferedImage;

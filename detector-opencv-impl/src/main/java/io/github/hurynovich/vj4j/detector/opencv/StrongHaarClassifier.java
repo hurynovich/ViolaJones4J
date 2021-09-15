@@ -1,10 +1,8 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
+import io.github.hurynovich.base.Int2D;
 import lombok.AllArgsConstructor;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor

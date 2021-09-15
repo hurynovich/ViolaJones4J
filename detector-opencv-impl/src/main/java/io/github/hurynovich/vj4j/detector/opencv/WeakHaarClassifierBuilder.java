@@ -1,4 +1,4 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
 import lombok.Setter;
 

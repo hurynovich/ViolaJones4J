@@ -13,6 +13,7 @@ application {
 
 dependencies {
     implementation(project(":base"))
+    implementation(project(":detector-opencv-impl"))
 
     implementation(DepsCatalog.picocli)
 

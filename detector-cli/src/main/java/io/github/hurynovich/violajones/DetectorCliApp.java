@@ -1,7 +1,7 @@
 package io.github.hurynovich.violajones;
 
 import io.github.hurynovich.base.Detector;
-import io.github.hurynovich.base.OpenCvCascadeLoader;
+import io.github.hurynovich.base.DetectorLoader;
 import io.github.hurynovich.base.Rect;
 import io.github.hurynovich.base.Utils;
 import picocli.CommandLine;
@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger.Level;
 import java.nio.file.Path;
+import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 
 import static io.github.hurynovich.violajones.OutputFormat.TEXT;
@@ -74,7 +75,7 @@ public class DetectorCliApp implements Callable<Integer> {
         log.log(INFO, "!!!!!   Start program   !!!!!");
 
         log.log(INFO, "Loading detector.");
-        Detector d = new OpenCvCascadeLoader().load(cascadeFile);
+        Detector d = loadDetector();
 
         log.log(INFO, "Detecting objects.");
         var result = d.detect(loadImage(imageFile));
@@ -102,6 +103,12 @@ public class DetectorCliApp implements Callable<Integer> {
         );
 
         return 0;
+    }
+
+    private Detector loadDetector() {
+        //TODO implement finding certain detector instead of first
+        var loader = ServiceLoader.load(DetectorLoader.class);
+        return loader.findFirst().orElseThrow().load(cascadeFile);
     }
 
     private static BufferedImage loadImage(File path) {

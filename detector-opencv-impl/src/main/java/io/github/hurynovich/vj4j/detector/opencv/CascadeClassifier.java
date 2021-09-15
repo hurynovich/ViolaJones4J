@@ -1,7 +1,7 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
+import io.github.hurynovich.base.Int2D;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 

@@ -1,9 +1,10 @@
-package io.github.hurynovich.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
+import io.github.hurynovich.base.Int2D;
+import io.github.hurynovich.base.Rect;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 public final class HaarFeature {
