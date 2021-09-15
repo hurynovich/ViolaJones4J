@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.ServiceLoader;
@@ -22,10 +21,11 @@ import java.util.concurrent.Callable;
 import static java.lang.System.Logger.Level.INFO;
 
 @CommandLine.Command(
-        name = "vj4j-detect"
+        name = "vj4j-detect",
+        versionProvider = VersionProvider.class
 )
 public class DetectorApp implements Callable<Integer> {
-    private static System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
+    private static final System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
 
     @Parameters(
             paramLabel = "image-file",
@@ -36,10 +36,12 @@ public class DetectorApp implements Callable<Integer> {
     //TODO find better name for option
     @Option(
             names = {"--cascade-file"},
-            description = "Path to file which contains data to initialize detector."
+            descriptionKey = "description.cascade-file"
     )
     private Path cascadeFile;
 
+/*
+    TODO implement
     @Option(names = {"--min-object-width"})
     private Integer minObjectWidth;
 
@@ -51,24 +53,21 @@ public class DetectorApp implements Callable<Integer> {
 
     @Option(names = {"--max-object-height"})
     private Integer maxObjectHeight;
+*/
 
     @Option(names = {"--output-format"})
     private OutputFormat outputFormat = OutputFormat.TEXT;
 
-    @Option(
-            names = {"--output-directory"},
-            description = "Path to directory where results of detection will be stored. " +
-                    "If it is empty then results will be printed to program standard output."
-    )
+    @Option(names = {"--output-directory"}, descriptionKey =  "description.output-directory" )
     private File outputDir;
 
-    @Option(names = { "--log-level" }, descriptionKey = "description.log-level")
-    private Level logLevel;
+//    @Option(names = { "--log-level" }, descriptionKey = "description.log-level")
+//    private Level logLevel;
 
-    @Option(names = { "-h", "--help" }, usageHelp = true, description = "Display a help message.")
+    @Option(names = { "--help" }, usageHelp = true)
     private boolean helpRequested;
 
-    @Option(names = { "--version" }, versionHelp = true, description = "Display version information.")
+    @Option(names = { "--version" }, versionHelp = true)
     private boolean versionRequested;
 
     @Override
@@ -141,4 +140,6 @@ public class DetectorApp implements Callable<Integer> {
         int exitCode = cmd.execute(args);
         System.exit(exitCode);
     }
+
+
 }
