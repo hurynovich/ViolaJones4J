@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv;
+package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.base.Detector;
 import io.github.hurynovich.vj4j.base.Int2D;

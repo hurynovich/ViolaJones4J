@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv;
+package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import org.junit.jupiter.api.Test;
 
