@@ -17,7 +17,7 @@ public class CascadeClassifierDetector implements Detector {
     public List<Rect> detect(BufferedImage img) {
         IntegralImg ii = IntegralImg.newIntegralImg(img);
         IntegralImg sqIi = IntegralImg.newSquaredIntegralImg(img);
-        SlidingWindow slider = new SlidingWindow(new Int2D(img.getWidth(), img.getHeight()), cascade.getWindowSize());
+        PositionSlider slider = new PositionSlider(new Int2D(img.getWidth(), img.getHeight()), cascade.getWindowSize());
         List<Rect> result = new ArrayList<>();
         Int2D pos;
         while ((pos = slider.next()) != null) {
