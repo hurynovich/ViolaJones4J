@@ -16,10 +16,14 @@ application {
 dependencies {
     implementation(project(":detector-api"))
     implementation(project(":detector-opencv-impl"))
+
     implementation(DepsCatalog.picocli)
     implementation(DepsCatalog.loggerApi)
     implementation(DepsCatalog.loggerImpl)
 
+    compileOnly(DepsCatalog.lombok)
+    annotationProcessor(DepsCatalog.lombok)
+    
     testImplementation(DepsCatalog.junitApi)
     testRuntimeOnly(DepsCatalog.junitEngine)
 }

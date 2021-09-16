@@ -7,6 +7,7 @@ module vj4j.detector.cli {
     requires org.slf4j.simple;
     requires vj4j.detector.api;
     requires vj4j.detector.opencv.impl;
+    requires static lombok;
 
     opens io.github.hurynovich.vj4j.detector.cli to info.picocli;
 
