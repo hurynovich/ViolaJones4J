@@ -1,5 +1,6 @@
-package io.github.hurynovich.vj4j.base;
+package io.github.hurynovich.vj4j.detector.opencv;
 
+import io.github.hurynovich.vj4j.base.Int2D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

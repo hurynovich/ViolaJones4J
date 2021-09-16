@@ -1,4 +1,7 @@
-package io.github.hurynovich.vj4j.base;
+package io.github.hurynovich.vj4j.detector.opencv;
+
+import io.github.hurynovich.vj4j.base.Image;
+import io.github.hurynovich.vj4j.base.Int2D;
 
 import java.awt.image.BufferedImage;
 
