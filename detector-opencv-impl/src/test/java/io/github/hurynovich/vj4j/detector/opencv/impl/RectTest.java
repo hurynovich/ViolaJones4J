@@ -9,7 +9,7 @@ class RectTest {
     @Test
     void testToString(){
         Rect r = new Rect(1,2, 3, 4);
-        assertEquals("(1, 2, 3, 4)", r.toString());
+        assertEquals("((1, 2), (3, 4))", r.toString());
     }
 
 }
