@@ -16,8 +16,9 @@ application {
 dependencies {
     implementation(project(":base"))
     implementation(project(":detector-opencv-impl"))
-
     implementation(DepsCatalog.picocli)
+    implementation(DepsCatalog.loggerApi)
+    implementation(DepsCatalog.loggerImpl)
 
     testImplementation(DepsCatalog.junitApi)
     testRuntimeOnly(DepsCatalog.junitEngine)

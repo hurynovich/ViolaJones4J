@@ -4,6 +4,9 @@ import io.github.hurynovich.vj4j.base.Detector;
 import io.github.hurynovich.vj4j.base.DetectorLoader;
 import io.github.hurynovich.vj4j.base.Rect;
 import io.github.hurynovich.vj4j.base.Utils;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -18,14 +21,12 @@ import java.util.ResourceBundle;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 
-import static java.lang.System.Logger.Level.INFO;
-
 @CommandLine.Command(
         name = "vj4j-detect",
         versionProvider = VersionProvider.class
 )
+@Slf4j
 public class DetectorApp implements Callable<Integer> {
-    private static final System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
 
     @Parameters(
             paramLabel = "image-file",
@@ -73,35 +74,36 @@ public class DetectorApp implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         //TODO use services to load detector
-        log.log(INFO, "!!!!!   Start program   !!!!!");
+        log.debug("!!!!!   Start program   !!!!!");
 
-        log.log(INFO, "Loading detector.");
+        log.info("Loading detector.");
         Detector d = loadDetector();
 
-        log.log(INFO, "Detecting objects.");
+        log.info("Detecting objects.");
         var result = d.detect(loadImage(imageFile));
 
         if(result.isEmpty()) {
-            log.log(INFO, "Objects were not detected.");
+            log.info("Objects were not detected.");
             return 0;
         }
 
-        log.log(INFO, "Printing result.");
-        for (Rect rect: result) {
-            System.out.println(rect);
+        if(outputFormat == OutputFormat.TEXT) {
+            log.info("Printing result.");
+            for (Rect rect : result) {
+                System.out.println(rect);
+            }
+        } else if(outputFormat == OutputFormat.IMAGE) {
+            log.info("Preparing result image.");
+            BufferedImage img = loadImage(imageFile);
+            for (Rect rect : result) {
+                Utils.drawRectangle(img, rect, Color.RED);
+            }
+            storeImage(img, new File(
+                            imageFile.getParent(),
+                            "detected_" + imageFile.getName()
+                    )
+            );
         }
-
-        log.log(INFO, "Preparing result image.");
-        BufferedImage img = loadImage(imageFile);
-        for (Rect rect: result) {
-            Utils.drawRectangle(img, rect, Color.RED);
-        }
-
-        storeImage(img, new File(
-                imageFile.getParent(),
-                "detected_" + imageFile.getName()
-                )
-        );
 
         return 0;
     }
