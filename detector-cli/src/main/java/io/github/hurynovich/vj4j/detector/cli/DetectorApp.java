@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.cli;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.DetectorLoader;
+import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.api.Rect;
 import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;

@@ -1,4 +1,4 @@
-import io.github.hurynovich.vj4j.detector.api.DetectorLoader;
+import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.opencv.impl.OpenCvCascadeLoader;
 
 module vj4j.detector.opencv.impl {

@@ -1,4 +1,6 @@
-package io.github.hurynovich.vj4j.detector.api;
+package io.github.hurynovich.vj4j.detector.spi;
+
+import io.github.hurynovich.vj4j.detector.api.Detector;
 
 import java.nio.file.Path;
 
