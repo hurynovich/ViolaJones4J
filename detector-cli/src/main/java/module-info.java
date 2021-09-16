@@ -1,4 +1,4 @@
-import io.github.hurynovich.vj4j.base.DetectorLoader;
+import io.github.hurynovich.vj4j.detector.api.DetectorLoader;
 
 module vj4j.detector.cli {
     requires java.desktop;

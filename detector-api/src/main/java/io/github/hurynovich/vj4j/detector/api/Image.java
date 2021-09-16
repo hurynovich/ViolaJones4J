@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.base;
+package io.github.hurynovich.vj4j.detector.api;
 
 public interface Image {
     public int getRGB(Int2D pos);

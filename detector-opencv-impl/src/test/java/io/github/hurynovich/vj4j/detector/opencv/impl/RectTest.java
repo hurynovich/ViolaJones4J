@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.base.Rect;
+import io.github.hurynovich.vj4j.detector.api.Rect;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

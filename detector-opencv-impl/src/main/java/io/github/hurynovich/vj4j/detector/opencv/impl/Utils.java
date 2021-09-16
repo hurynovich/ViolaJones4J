@@ -1,10 +1,5 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.base.Rect;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public final class Utils {
 
     private Utils(){}
