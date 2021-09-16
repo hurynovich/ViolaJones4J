@@ -3,10 +3,7 @@ package io.github.hurynovich.vj4j.detector.cli;
 import io.github.hurynovich.vj4j.base.Detector;
 import io.github.hurynovich.vj4j.base.DetectorLoader;
 import io.github.hurynovich.vj4j.base.Rect;
-import io.github.hurynovich.vj4j.base.Utils;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -96,7 +93,7 @@ public class DetectorApp implements Callable<Integer> {
             log.info("Preparing result image.");
             BufferedImage img = loadImage(imageFile);
             for (Rect rect : result) {
-                Utils.drawRectangle(img, rect, Color.RED);
+                drawRectangle(img, rect, Color.RED);
             }
             storeImage(img, new File(
                             imageFile.getParent(),
@@ -143,5 +140,18 @@ public class DetectorApp implements Callable<Integer> {
         System.exit(exitCode);
     }
 
+    public static void drawRectangle(BufferedImage img, Rect rectangle, Color drawColor) {
+        Graphics g = img.getGraphics();
+        g.setColor(drawColor);
 
+        int x1 = rectangle.getA().x;
+        int y1 = rectangle.getA().y;
+        int x2 = rectangle.getB().x;
+        int y2 = rectangle.getB().y;
+
+        g.drawLine(x1, y1, x2, y1);
+        g.drawLine(x2, y1, x2, y2);
+        g.drawLine(x2, y2, x1, y2);
+        g.drawLine(x1, y2, x1, y1);
+    }
 }

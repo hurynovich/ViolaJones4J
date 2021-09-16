@@ -1,4 +1,6 @@
-package io.github.hurynovich.vj4j.base;
+package io.github.hurynovich.vj4j.detector.opencv;
+
+import io.github.hurynovich.vj4j.base.Rect;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -32,18 +34,4 @@ public final class Utils {
         return (argb >> 24) & 0xFF;
     }
 
-    public static void drawRectangle(BufferedImage img, Rect rectangle, Color drawColor) {
-        Graphics g = img.getGraphics();
-        g.setColor(drawColor);
-
-        int x1 = rectangle.getA().x;
-        int y1 = rectangle.getA().y;
-        int x2 = rectangle.getB().x;
-        int y2 = rectangle.getB().y;
-
-        g.drawLine(x1, y1, x2, y1);
-        g.drawLine(x2, y1, x2, y2);
-        g.drawLine(x2, y2, x1, y2);
-        g.drawLine(x1, y2, x1, y1);
-    }
 }

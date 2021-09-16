@@ -1,6 +1,5 @@
 package io.github.hurynovich.vj4j.detector.opencv;
 
-import io.github.hurynovich.vj4j.base.Utils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

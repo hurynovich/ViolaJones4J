@@ -2,7 +2,6 @@ package io.github.hurynovich.vj4j.detector.opencv;
 
 import io.github.hurynovich.vj4j.base.Int2D;
 import io.github.hurynovich.vj4j.base.Rect;
-import io.github.hurynovich.vj4j.base.Utils;
 
 import java.awt.image.BufferedImage;
 import java.util.function.IntUnaryOperator;
