@@ -1,10 +1,14 @@
 package io.github.hurynovich.vj4j.detector.api;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@AllArgsConstructor
+import static java.lang.Math.round;
+
 @Getter
+@EqualsAndHashCode
+@AllArgsConstructor
 public final class Int2D {
     public final int x;
     public final int y;
@@ -13,8 +17,20 @@ public final class Int2D {
         return new Int2D(x + point.x, y + point.y);
     }
 
+    public Int2D multiply(double multiplier) {
+        return int2D((int)round(x * multiplier), (int)round(y * multiplier));
+    }
+
+    public Int2D multiply(int multiplier) {
+        return int2D(x * multiplier, y * multiplier);
+    }
+
     @Override
     public String toString() {
         return "(x=" + x + ", y=" + y + ')';
+    }
+
+    public static Int2D int2D(int x, int y){
+        return new Int2D(x, y);
     }
 }
