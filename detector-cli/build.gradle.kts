@@ -14,7 +14,7 @@ application {
 }
 
 dependencies {
-    implementation(project(":base"))
+    implementation(project(":detector-api"))
     implementation(project(":detector-opencv-impl"))
     implementation(DepsCatalog.picocli)
     implementation(DepsCatalog.loggerApi)

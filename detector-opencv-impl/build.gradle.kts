@@ -8,7 +8,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":base"))
+    implementation(project(":detector-api"))
 
     compileOnly(DepsCatalog.lombok)
     annotationProcessor(DepsCatalog.lombok)

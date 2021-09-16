@@ -1,5 +1,5 @@
 rootProject.name = "vj4j-parent"
 
-include("base")
+include("detector-api")
 include("detector-cli")
 include("detector-opencv-impl")

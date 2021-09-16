@@ -1,4 +1,4 @@
-module vj4j.base {
+module vj4j.detector.api {
     requires java.desktop;
     requires static lombok;
 
