@@ -1,5 +1,5 @@
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
-import io.github.hurynovich.vj4j.detector.opencv.impl.OpenCvCascadeLoader;
+import io.github.hurynovich.vj4j.detector.opencv.impl.io.OpenCvCascadeLoader;
 
 module vj4j.detector.opencv.impl {
     requires java.desktop;

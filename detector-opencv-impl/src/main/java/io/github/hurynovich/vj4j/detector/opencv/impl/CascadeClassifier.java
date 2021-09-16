@@ -8,14 +8,14 @@ import java.util.List;
 
 class CascadeClassifier {
     private final List<StrongHaarClassifier> stages;
-    private final Int2D nativeWindowSize;
+    private final Int2D orgSpotSize;
 
     @Getter
     private Int2D windowSize;
 
-    CascadeClassifier(List<StrongHaarClassifier> stages, Int2D nativeWindowSize) {
+    public CascadeClassifier(List<StrongHaarClassifier> stages, Int2D nativeWindowSize) {
         this.stages = stages;
-        this.nativeWindowSize = nativeWindowSize;
+        this.orgSpotSize = nativeWindowSize;
         this.windowSize = nativeWindowSize;
     }
 

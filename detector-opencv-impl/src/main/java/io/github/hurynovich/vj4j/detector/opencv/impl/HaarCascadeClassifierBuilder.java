@@ -3,12 +3,13 @@ package io.github.hurynovich.vj4j.detector.opencv.impl;
 import io.github.hurynovich.vj4j.detector.api.Detector;
 import io.github.hurynovich.vj4j.detector.api.Int2D;
 import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.detector.opencv.impl.*;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-final class HaarCascadeClassifierBuilder {
+public final class HaarCascadeClassifierBuilder {
     private final List<StageData> stages = new ArrayList<>();
     private final List<FeatureData> features = new ArrayList<>();
     private FeatureData currentFeature;

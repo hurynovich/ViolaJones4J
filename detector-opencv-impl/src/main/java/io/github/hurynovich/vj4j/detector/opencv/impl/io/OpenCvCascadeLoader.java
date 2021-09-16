@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv.impl;
+package io.github.hurynovich.vj4j.detector.opencv.impl.io;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
