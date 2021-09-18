@@ -1,9 +1,10 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
+import io.github.hurynovich.vj4j.detector.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Int2D;
 import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils;
 
-import java.awt.image.BufferedImage;
 import java.util.function.IntUnaryOperator;
 
 public class IntegralImg {
@@ -37,7 +38,7 @@ public class IntegralImg {
     public int getHigh(){return height;}
 
 
-    IntegralImg(BufferedImage img, IntUnaryOperator pixelValCalculator){
+    IntegralImg(Image img, IntUnaryOperator pixelValCalculator){
         //allocate array to store integral image
         width = img.getWidth() + 1;
         height = img.getHeight() + 1;
@@ -65,11 +66,11 @@ public class IntegralImg {
         }
     }
 
-    public static IntegralImg newIntegralImg(BufferedImage img) {
+    public static IntegralImg newIntegralImg(Image img) {
         return new IntegralImg(img, Utils::luminance);
     }
 
-    public static IntegralImg newSquaredIntegralImg(BufferedImage img) {
+    public static IntegralImg newSquaredIntegralImg(Image img) {
 
         IntUnaryOperator f = (int rgb) -> {
             int gray = Utils.luminance(rgb);

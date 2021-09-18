@@ -1,5 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
+import io.github.hurynovich.vj4j.detector.opencv.impl.util.AwtImageWrapper;
+import io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,7 @@ public class IntegralImgImplTest {
         srcImg.getRaster().setPixel(2,2, new int[]{5,5,5});
         srcImg.getRaster().setPixel(3,2, new int[]{7,7,7});
 
-        IntegralImg ii = IntegralImg.newIntegralImg(srcImg);
+        IntegralImg ii = IntegralImg.newIntegralImg(new AwtImageWrapper(srcImg));
 
         System.out.println("Integral image:");
         for (int y = 0; y < ii.getHigh(); y++){
@@ -75,7 +77,7 @@ public class IntegralImgImplTest {
         srcImg.getRaster().setPixel(2,2, new int[]{5,5,5});
         srcImg.getRaster().setPixel(3,2, new int[]{7,7,7});
 
-        IntegralImg ii = IntegralImg.newIntegralImg(srcImg);
+        IntegralImg ii = IntegralImg.newIntegralImg(new AwtImageWrapper(srcImg));
 
         System.out.println("Integral image:");
         for (int y = 0; y < ii.getHigh(); y++){
