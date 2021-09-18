@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv.impl;
+package io.github.hurynovich.vj4j.detector.opencv.impl.util;
 
 import io.github.hurynovich.vj4j.detector.api.Int2D;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static io.github.hurynovich.vj4j.detector.api.Int2D.int2D;
-import static io.github.hurynovich.vj4j.detector.opencv.impl.Utils.correctMaxObjectSize;
-import static io.github.hurynovich.vj4j.detector.opencv.impl.Utils.correctMinObjectSize;
+import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMaxObjectSize;
+import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMinObjectSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
