@@ -10,6 +10,9 @@ import static java.lang.Math.round;
 @EqualsAndHashCode
 @AllArgsConstructor
 public final class Int2D {
+
+    public static final Int2D ZERO = int2D(0, 0);
+
     public final int x;
     public final int y;
 
@@ -19,6 +22,10 @@ public final class Int2D {
 
     public Int2D multiply(double multiplier) {
         return int2D((int)round(x * multiplier), (int)round(y * multiplier));
+    }
+
+    public Int2D divide(double divider) {
+        return int2D((int)round(x / divider), (int)round(y / divider));
     }
 
     public Int2D multiply(int multiplier) {
