@@ -1,6 +1,7 @@
 package io.github.hurynovich.vj4j.detector.cli;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
+import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.api.Rect;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +78,7 @@ public class DetectorApp implements Callable<Integer> {
         Detector d = loadDetector();
 
         log.info("Detecting objects.");
-        var result = d.detect(loadImage(imageFile));
+        var result = d.detect(loadImage(imageFile), new Settings(){});
 
         if(result.isEmpty()) {
             log.info("Objects were not detected.");
