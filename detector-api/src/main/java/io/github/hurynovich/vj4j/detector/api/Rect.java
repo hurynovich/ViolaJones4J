@@ -21,8 +21,8 @@ public final class Rect {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("((").append(a.x).append(", ").append(a.y).append("), ");
-        sb.append("(").append(b.x).append(", ").append(b.y).append("))");
+        sb.append("[(").append(a.x).append(", ").append(a.y).append("), ");
+        sb.append("(").append(b.x).append(", ").append(b.y).append(")]");
         return sb.toString();
     }
 
