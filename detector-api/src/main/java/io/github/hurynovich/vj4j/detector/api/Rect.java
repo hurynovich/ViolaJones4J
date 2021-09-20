@@ -10,6 +10,7 @@ import static java.lang.Math.min;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
+//TODO think to rename as Rectangle
 public final class Rect {
     public final Int2D a;
     public final Int2D b;

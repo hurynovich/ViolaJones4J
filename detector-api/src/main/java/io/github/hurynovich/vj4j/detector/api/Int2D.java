@@ -9,6 +9,7 @@ import static java.lang.Math.round;
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
+//TODO think to rename as Point
 public final class Int2D {
 
     public static final Int2D ZERO = int2D(0, 0);

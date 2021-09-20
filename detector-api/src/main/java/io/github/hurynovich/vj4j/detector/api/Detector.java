@@ -4,5 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface Detector {
-    List<Rect> detect(BufferedImage image, Settings settings) throws DetectorException;;
+    //TODO replace BufferedImage with Image interface
+    List<Rect> detect(BufferedImage image, Settings settings) throws DetectorException;
 }
