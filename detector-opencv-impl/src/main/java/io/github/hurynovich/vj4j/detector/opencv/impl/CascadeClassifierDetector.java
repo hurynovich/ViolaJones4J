@@ -25,6 +25,8 @@ public class CascadeClassifierDetector implements Detector {
         final var imgSz = int2D(img.getWidth(), img.getHeight());
         final var minObjSz = int2D(40, 40);
         final var maxObjSz = correctMaxObjectSize(spotSz, imgSz, imgSz).divide(4);
+        final int minSections = 3;
+        final double minOverlap = 10.0;
 
         List<Rect> result = new ArrayList<>();
         ScaleSlider scaleItr = new ScaleSlider(spotSz, minObjSz, maxObjSz, 1.1);
@@ -35,8 +37,7 @@ public class CascadeClassifierDetector implements Detector {
             applyCascade(scaledImg, scale, result);
         }
 
-        int minNeibors = 3;
-        return new SimpleRectMerger(minNeibors, 10.0).merge(result);
+        return new SimpleRectMerger(minSections, minOverlap).merge(result);
     }
 
     private void applyCascade(AwtImageWrapper img, double scale, List<Rect> result) {
@@ -44,35 +45,33 @@ public class CascadeClassifierDetector implements Detector {
         IntegralImg sqIi = IntegralImg.newSquaredIntegralImg(img);
         PositionSlider slider = new PositionSlider(new Int2D(img.getWidth(), img.getHeight()), cascade.getWindowSize());
 
-        Int2D pos;
-        while ((pos = slider.next()) != null) {
-            double valueFactor = calcValueFactor(ii, sqIi, pos, cascade.getWindowSize());
-            if(cascade.detect(ii, valueFactor, pos)) {
+        Int2D spotPos;
+        while ((spotPos = slider.next()) != null) {
+            double valueFactor = calcValueFactor(ii, sqIi, spotPos, cascade.getWindowSize());
+            if(cascade.detect(ii, valueFactor, spotPos)) {
                 result.add(new Rect(
-                        pos.multiply(scale),
-                        pos.plus(cascade.getWindowSize()).multiply(scale)
+                        spotPos.multiply(scale),
+                        spotPos.plus(cascade.getWindowSize()).multiply(scale)
                 ));
             }
         }
     }
 
-    private double calcValueFactor(IntegralImg ii, IntegralImg sqIi, Int2D pos, Int2D winSize) {
-        var normWin = new Rect(
-                pos.x + 1,
-                pos.y + 1,
-                pos.x + winSize.x - 1,
-                pos.y + winSize.y -1
+    private double calcValueFactor(IntegralImg ii, IntegralImg sqIi, Int2D spotPos, Int2D spotSz) {
+        var inside = new Rect(
+                spotPos.x + 1,
+                spotPos.y + 1,
+                spotPos.x + spotSz.x - 1,
+                spotPos.y + spotSz.y -1
         );
-        int valSum = ii.getSum(normWin);
-        int valSqSum = sqIi.getSum (normWin);
+        int valSum = ii.getSum(inside);
+        int valSqSum = sqIi.getSum (inside);
 
-        //площадь окна меньшего на 1 px по краю
-        int winArea = normWin.area();
-        double nf = (winArea * valSqSum) - (valSum * valSum);
+        int insideArea = inside.area();
+        double normFactor = (insideArea * valSqSum) - (valSum * valSum);
 
-        if (nf > 0) {
-            nf = Math.sqrt(nf);
-            return 1.0 / nf;
+        if (normFactor > 0) {
+            return 1.0 / Math.sqrt(normFactor);
         } else {
             return  1.0;
         }
