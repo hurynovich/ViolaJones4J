@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Settings {
-    private Int2D minObjectSize;
-    private Int2D maxObjectSize;
-    private int minNeighbors;
+    private Int2D   minObjectSize;
+    private Int2D   maxObjectSize;
+    private Integer minNeighbors;
+    private Double  minOverlap;
 }
