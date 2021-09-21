@@ -5,3 +5,4 @@ include("detector-cli")
 include("detector-opencv-impl")
 
 include("trainer-api")
+include("commons")
