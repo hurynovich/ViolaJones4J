@@ -15,7 +15,7 @@ application {
 
 dependencies {
     implementation(project(":detector-api"))
-    implementation(project(":detector-opencv-impl"))
+    runtimeOnly(project(":detector-opencv-impl"))
 
     implementation(DepsCatalog.picocli)
     implementation(DepsCatalog.loggerApi)
