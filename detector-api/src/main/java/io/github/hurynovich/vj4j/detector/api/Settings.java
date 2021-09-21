@@ -1,9 +1,8 @@
 package io.github.hurynovich.vj4j.detector.api;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
+@Data
 public class Settings {
     private Point minObjectSize;
     private Point maxObjectSize;
