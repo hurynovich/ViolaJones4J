@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":detector-api"))
+
     testImplementation(DepsCatalog.junitApi)
     testImplementation(DepsCatalog.junitParams)
     testRuntimeOnly(DepsCatalog.junitEngine)
