@@ -4,6 +4,7 @@ import io.github.hurynovich.vj4j.detector.api.Detector;
 import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.api.Rect;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -13,10 +14,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ResourceBundle;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
+
+import static io.github.hurynovich.vj4j.detector.cli.OutputFormat.IMAGE;
+import static io.github.hurynovich.vj4j.detector.cli.OutputFormat.TEXT;
 
 import static java.lang.System.Logger.Level.DEBUG;
 
@@ -35,14 +39,10 @@ public class DetectorApp implements Callable<Integer> {
     private File imageFile;
 
     //TODO find better name for option
-    @Option(
-            names = {"--cascade-file"},
-            descriptionKey = "description.cascade-file"
-    )
+    @Option(names = {"--cascade-file"}, descriptionKey = "description.cascade-file")
     private Path cascadeFile;
 
-/*
-    TODO implement
+    //TODO implement
     @Option(names = {"--min-object-width"})
     private Integer minObjectWidth;
 
@@ -54,16 +54,12 @@ public class DetectorApp implements Callable<Integer> {
 
     @Option(names = {"--max-object-height"})
     private Integer maxObjectHeight;
-*/
 
     @Option(names = {"--output-format"})
     private OutputFormat outputFormat = OutputFormat.TEXT;
 
     @Option(names = {"--output-directory"}, descriptionKey =  "description.output-directory" )
     private File outputDir;
-
-//    @Option(names = { "--log-level" }, descriptionKey = "description.log-level")
-//    private Level logLevel;
 
     @Option(names = { "--help" }, usageHelp = true)
     private boolean helpRequested;
@@ -73,37 +69,35 @@ public class DetectorApp implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        //TODO use services to load detector
-
         log.log(DEBUG, "Start loading detector.");
         Detector d = loadDetector();
         log.log(DEBUG, "Detector '{}' was loaded.", d.getClass());
 
         log.log(DEBUG, "Start detecting objects.");
-        var result = d.detect(loadImage(imageFile), new Settings(){});
 
-        if(result.isEmpty()) {
+        BufferedImage srcImg = loadImage(imageFile);
+        final var result = d.detect(srcImg, new Settings(){});
+        if(!result.isEmpty()) {
+            log.log(DEBUG, "{} objects were detected.", result.size());
+        } else {
             log.log(DEBUG, "Objects were not detected.");
             return 0;
         }
 
-        if(outputFormat == OutputFormat.TEXT) {
-            log.log(DEBUG, "Printing result.");
+        if(outputFormat == TEXT) {
+            log.log(DEBUG, "Storing {} result.", TEXT);
             for (Rect rect : result) {
                 System.out.println(rect);
             }
-        } else if(outputFormat == OutputFormat.IMAGE) {
-            log.log(DEBUG, "Preparing result image.");
-            BufferedImage img = loadImage(imageFile);
+        } else if(outputFormat == IMAGE) {
+            log.log(DEBUG, "Storing {} result.", IMAGE);
             for (Rect rect : result) {
-                drawRectangle(img, rect, Color.RED);
+                drawRectangle(srcImg, rect, Color.RED);
             }
-            storeImage(img, new File(
-                            imageFile.getParent(),
-                            "detected_" + imageFile.getName()
-                    )
-            );
+            File targetFile = new File(imageFile.getParent(), "detect_" + imageFile.getName());
+            storeImageResult(srcImg, targetFile);
         }
+        log.log(DEBUG, "Result was stored.");
 
         return 0;
     }
@@ -125,7 +119,7 @@ public class DetectorApp implements Callable<Integer> {
         }
     }
 
-    private static void storeImage(BufferedImage img, File path) {
+    private static void storeImageResult(BufferedImage img, File path) {
 
         //TODO
         try {
