@@ -1,6 +1,7 @@
-package io.github.hurynovich.vj4j.detector.opencv.impl.util;
+package io.github.hurynovich.vj4j.commons;
 
 import io.github.hurynovich.vj4j.detector.api.Point;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,11 +9,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static io.github.hurynovich.vj4j.commons.Utils.*;
 import static io.github.hurynovich.vj4j.detector.api.Point.pointOf;
-import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMaxObjectSize;
-import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMinObjectSize;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilsTest {
     private final int argb = 0xFF_AA_BB_CC;
@@ -20,7 +19,7 @@ class UtilsTest {
     @Test
     void getRedTest(){
         int redVal =  Utils.getRed(argb);
-        assertEquals(0xAA, redVal);
+        Assertions.assertEquals(0xAA, redVal);
     }
 
     @Test
@@ -31,7 +30,7 @@ class UtilsTest {
     @Test
     void getBlueTest(){
         int blueVal =  Utils.getBlue(argb);
-        assertEquals(0xCC, blueVal);
+        Assertions.assertEquals(0xCC, blueVal);
     }
 
     @Test
@@ -51,9 +50,9 @@ class UtilsTest {
         Point minSpotY = new Point(20, 11);
 
         //ensure that already existing instance returned
-        assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpot));
-        assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpotX));
-        assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpotY));
+        Assertions.assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpot));
+        Assertions.assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpotX));
+        Assertions.assertTrue(nativeSpot == correctMinObjectSize(nativeSpot, minSpotY));
     }
 
     //TODO use parametrized test
@@ -65,11 +64,11 @@ class UtilsTest {
 
         var expected = new Point(10, 7*2);
         var result = correctMinObjectSize(nativeSpot, minSpotByX);
-        assertEquals(expected, result);
+        Assertions.assertEquals(expected, result);
 
         expected = new Point(5*3, 21);
         result = correctMinObjectSize(nativeSpot, minSpotByY);
-        assertEquals(expected, result);
+        Assertions.assertEquals(expected, result);
     }
 
     static Stream<Arguments> correctMaxSpotSizeProvider(){
@@ -78,12 +77,12 @@ class UtilsTest {
         final var imgSz = pointOf(90, 140);
 
         return Stream.of(
-                arguments(spotSz, imgSz, pointOf(10, 2), pointOf(10, 30), "Case when object height less then spot height."),
-                arguments(spotSz, imgSz, pointOf(2, 45), pointOf(15, 45), "Case when object width less then spot width."),
-                arguments(spotSz, imgSz, pointOf(1, 2), pointOf(5, 15), "Case when object width and height less then spot ones."),
-                arguments(spotSz, imgSz, pointOf(100, 2), maxSpotSz, "Case when object width greater then image width."),
-                arguments(spotSz, imgSz, pointOf(10, 150), maxSpotSz, "Case when object height greater then image height."),
-                arguments(spotSz, imgSz, pointOf(100, 150), maxSpotSz, "Case when Object size is greater then Image size.")
+                Arguments.arguments(spotSz, imgSz, pointOf(10, 2), pointOf(10, 30), "Case when object height less then spot height."),
+                Arguments.arguments(spotSz, imgSz, pointOf(2, 45), pointOf(15, 45), "Case when object width less then spot width."),
+                Arguments.arguments(spotSz, imgSz, pointOf(1, 2), pointOf(5, 15), "Case when object width and height less then spot ones."),
+                Arguments.arguments(spotSz, imgSz, pointOf(100, 2), maxSpotSz, "Case when object width greater then image width."),
+                Arguments.arguments(spotSz, imgSz, pointOf(10, 150), maxSpotSz, "Case when object height greater then image height."),
+                Arguments.arguments(spotSz, imgSz, pointOf(100, 150), maxSpotSz, "Case when Object size is greater then Image size.")
         );
     }
 
@@ -91,16 +90,16 @@ class UtilsTest {
     @MethodSource("correctMaxSpotSizeProvider")
     void testCorrectMaxSpotSize(Point spotSz, Point imgSz, Point objectSize, Point expected, String msg){
         var result = correctMaxObjectSize(spotSz, imgSz, objectSize);
-        assertEquals(expected, result, msg);
+        Assertions.assertEquals(expected, result, msg);
 
         double expectedAspectRation = 1.0 * spotSz.x / spotSz.y;
         double resultAspectRation = 1.0 * result.x / result.y;
         double delta = 0.005;
-        assertEquals(expectedAspectRation, resultAspectRation, delta, "Object aspect ratio must be equal to Spot aspect ratio.");
+        Assertions.assertEquals(expectedAspectRation, resultAspectRation, delta, "Object aspect ratio must be equal to Spot aspect ratio.");
 
-        assertTrue(result.x >= spotSz.x, "Object width must not be less then Spot width.");
-        assertTrue(result.y >= spotSz.y, "Object height must not be less then Spot height.");
-        assertTrue(result.x <= imgSz.x, "Object width must not be greater then Image width.");
-        assertTrue(result.y <= imgSz.y, "Object height must not be greater then Image height.");
+        Assertions.assertTrue(result.x >= spotSz.x, "Object width must not be less then Spot width.");
+        Assertions.assertTrue(result.y >= spotSz.y, "Object height must not be less then Spot height.");
+        Assertions.assertTrue(result.x <= imgSz.x, "Object width must not be greater then Image width.");
+        Assertions.assertTrue(result.y <= imgSz.y, "Object height must not be greater then Image height.");
     }
 }
