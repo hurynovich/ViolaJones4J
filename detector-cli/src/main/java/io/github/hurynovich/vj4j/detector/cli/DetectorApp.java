@@ -22,7 +22,8 @@ import static java.lang.System.Logger.Level.DEBUG;
 
 @CommandLine.Command(
         name = "vj4j-detect",
-        versionProvider = VersionProvider.class
+        versionProvider = VersionProvider.class,
+        resourceBundle = "Messages"
 )
 public class DetectorApp implements Callable<Integer> {
     private static final System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
@@ -137,7 +138,6 @@ public class DetectorApp implements Callable<Integer> {
 
     public static void main(String[] args) {
         CommandLine cmd = new CommandLine(new DetectorApp());
-        cmd.setResourceBundle(ResourceBundle.getBundle("/Messages"));
         int exitCode = cmd.execute(args);
         System.exit(exitCode);
     }
