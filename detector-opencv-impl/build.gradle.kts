@@ -16,9 +16,6 @@ dependencies {
     testCompileOnly(DepsCatalog.lombok)
     testAnnotationProcessor(DepsCatalog.lombok)
 
-    testImplementation(DepsCatalog.loggerApi)
-    testRuntimeOnly(DepsCatalog.loggerImpl)
-
     testImplementation(DepsCatalog.junitApi)
     testImplementation(DepsCatalog.junitParams)
     testRuntimeOnly(DepsCatalog.junitEngine)
