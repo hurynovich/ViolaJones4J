@@ -31,7 +31,7 @@ public class DetectorApp implements Callable<Integer> {
     @Parameters(
             paramLabel = "image-file",
             arity = "0..1",
-            description = "Path to image file where detection is performed.")
+            descriptionKey = "description.image-file")
     private File imageFile;
 
     //TODO find better name for option
