@@ -3,8 +3,6 @@ import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 module vj4j.detector.cli {
     requires java.desktop;
     requires info.picocli;
-    requires org.slf4j;
-    requires org.slf4j.simple;
     requires vj4j.detector.api;
     requires static lombok;
 

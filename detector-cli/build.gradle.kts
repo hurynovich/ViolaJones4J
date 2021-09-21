@@ -18,8 +18,6 @@ dependencies {
     runtimeOnly(project(":detector-opencv-impl"))
 
     implementation(DepsCatalog.picocli)
-    implementation(DepsCatalog.loggerApi)
-    implementation(DepsCatalog.loggerImpl)
 
     compileOnly(DepsCatalog.lombok)
     annotationProcessor(DepsCatalog.lombok)

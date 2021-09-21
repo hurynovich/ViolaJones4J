@@ -15,7 +15,6 @@ import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctM
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-@Slf4j
 class UtilsTest {
     private final int argb = 0xFF_AA_BB_CC;
 

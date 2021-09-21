@@ -4,7 +4,6 @@ import io.github.hurynovich.vj4j.detector.api.Detector;
 import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.api.Rect;
-import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -19,12 +18,14 @@ import java.util.ResourceBundle;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
 
+import static java.lang.System.Logger.Level.DEBUG;
+
 @CommandLine.Command(
         name = "vj4j-detect",
         versionProvider = VersionProvider.class
 )
-@Slf4j
 public class DetectorApp implements Callable<Integer> {
+    private static final System.Logger log = System.getLogger(DetectorApp.class.getCanonicalName());
 
     @Parameters(
             paramLabel = "image-file",
@@ -72,26 +73,26 @@ public class DetectorApp implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         //TODO use services to load detector
-        log.debug("!!!!!   Start program   !!!!!");
 
-        log.info("Loading detector.");
+        log.log(DEBUG, "Start loading detector.");
         Detector d = loadDetector();
+        log.log(DEBUG, "Detector '{}' was loaded.", d.getClass());
 
-        log.info("Detecting objects.");
+        log.log(DEBUG, "Start detecting objects.");
         var result = d.detect(loadImage(imageFile), new Settings(){});
 
         if(result.isEmpty()) {
-            log.info("Objects were not detected.");
+            log.log(DEBUG, "Objects were not detected.");
             return 0;
         }
 
         if(outputFormat == OutputFormat.TEXT) {
-            log.info("Printing result.");
+            log.log(DEBUG, "Printing result.");
             for (Rect rect : result) {
                 System.out.println(rect);
             }
         } else if(outputFormat == OutputFormat.IMAGE) {
-            log.info("Preparing result image.");
+            log.log(DEBUG, "Preparing result image.");
             BufferedImage img = loadImage(imageFile);
             for (Rect rect : result) {
                 drawRectangle(img, rect, Color.RED);
