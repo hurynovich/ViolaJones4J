@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl.util;
 
 import io.github.hurynovich.vj4j.detector.api.Image;
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,7 +38,7 @@ public final class AwtImageWrapper implements Image {
         return new AwtImageWrapper(resized);
     }
 
-    public static AwtImageWrapper scale(AwtImageWrapper img, Int2D targetSize) {
+    public static AwtImageWrapper scale(AwtImageWrapper img, Point targetSize) {
         return scale(img, targetSize.x, targetSize.y);
     }
 }

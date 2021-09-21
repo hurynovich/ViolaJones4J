@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 
 public class ScaleSlider {
     private final double maxScale;
@@ -8,7 +8,7 @@ public class ScaleSlider {
 
     private double next = 1.0;
 
-    public ScaleSlider(Int2D spotSz, Int2D minObjSz, Int2D maxObjSz, double scaleStep) {
+    public ScaleSlider(Point spotSz, Point minObjSz, Point maxObjSz, double scaleStep) {
         //TODO use better exception
         if(scaleStep <= 1.0) throw new RuntimeException();
         this.scaleStep = scaleStep;

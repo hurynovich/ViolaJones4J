@@ -1,9 +1,8 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import io.github.hurynovich.vj4j.detector.api.Rect;
-import io.github.hurynovich.vj4j.detector.opencv.impl.*;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -84,7 +83,7 @@ public final class HaarCascadeClassifierBuilder {
         for (var stageData : this.stages) {
             stages.add(buildStage(stageData, features));
         }
-        var cascade = new CascadeClassifier(stages, new Int2D(windowWidth, windowHeight));
+        var cascade = new CascadeClassifier(stages, new Point(windowWidth, windowHeight));
         return new CascadeClassifierDetector(cascade);
     }
 

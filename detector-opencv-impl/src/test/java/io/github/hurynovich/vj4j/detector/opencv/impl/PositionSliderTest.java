@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +12,7 @@ class PositionSliderTest {
         int imgSize = 100;
         int dtctSize = 10;
         int step = 1;
-        PositionSlider sw = new PositionSlider(new Int2D(imgSize, imgSize), new Int2D(dtctSize, dtctSize), step, step);
+        PositionSlider sw = new PositionSlider(new Point(imgSize, imgSize), new Point(dtctSize, dtctSize), step, step);
 
         int i = 0;
         while(sw.next() != null) i++;

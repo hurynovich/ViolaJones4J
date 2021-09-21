@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.detector.api.Image;
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import io.github.hurynovich.vj4j.detector.api.Rect;
 import io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils;
 
@@ -12,7 +12,7 @@ public class IntegralImg {
     private final int width;
     private final int  height;
 
-    public final int getValue(Int2D point){
+    public final int getValue(Point point){
         return data[point.y][point.x];
     }
     public int getValue(int x, int y){

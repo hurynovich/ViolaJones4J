@@ -1,11 +1,11 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 
 //TODO add validation for constructor args
 public class PositionSlider {
-    private final Int2D imgSz;
-    private final Int2D spotSz;
+    private final Point imgSz;
+    private final Point spotSz;
 
     //TODO initialization for it
     private final int xStep;
@@ -14,7 +14,7 @@ public class PositionSlider {
     private int x;
     private int y = 0;
 
-    public PositionSlider(Int2D imgSz, Int2D spotSz, int xStep, int yStep){
+    public PositionSlider(Point imgSz, Point spotSz, int xStep, int yStep){
         this.imgSz = imgSz;
         this.spotSz = spotSz;
         this.xStep = xStep;
@@ -23,17 +23,17 @@ public class PositionSlider {
         //it is done to return (0, 0) by #next() at first call
         this.x = -xStep;
     }
-    public PositionSlider(Int2D imgSz, Int2D spotSz){
+    public PositionSlider(Point imgSz, Point spotSz){
         this(imgSz, spotSz, 2, 2);
     }
 
-    public Int2D next(){
+    public Point next(){
         x += xStep;
-        if(x + spotSz.x < imgSz.x) return new Int2D(x, y);
+        if(x + spotSz.x < imgSz.x) return new Point(x, y);
 
         x = 0;
         y += yStep;
-        if(y + spotSz.y < imgSz.y) return new Int2D(x, y);
+        if(y + spotSz.y < imgSz.y) return new Point(x, y);
 
         return null;
     }

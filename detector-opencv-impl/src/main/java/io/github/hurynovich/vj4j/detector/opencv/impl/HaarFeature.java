@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import io.github.hurynovich.vj4j.detector.api.Rect;
 import lombok.AllArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public final class HaarFeature {
     private final List<Part> parts;
 
-    double calcValue(IntegralImg iImg, Int2D shift) {
+    double calcValue(IntegralImg iImg, Point shift) {
         int result = 0;
         for (Part p : parts) {
             var val = iImg.getSum(p.area.translate(shift));

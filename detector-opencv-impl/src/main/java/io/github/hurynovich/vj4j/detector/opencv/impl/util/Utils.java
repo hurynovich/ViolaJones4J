@@ -1,8 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl.util;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 
-import static io.github.hurynovich.vj4j.detector.api.Int2D.int2D;
 import static java.lang.Math.round;
 
 public final class Utils {
@@ -34,7 +33,7 @@ public final class Utils {
         return (argb >> 24) & 0xFF;
     }
 
-    public static Int2D correctMinObjectSize(Int2D spotSz, Int2D objSz){
+    public static Point correctMinObjectSize(Point spotSz, Point objSz){
         if(objSz.x <= spotSz.x || objSz.y <= spotSz.y) return spotSz;
 
         //object width or height must not be less than corresponding cascade window width or height
@@ -54,7 +53,7 @@ public final class Utils {
      * @param objSz - upper size limit for object desired
      * @return upper size limit for object
      */
-    public static Int2D correctMaxObjectSize(final Int2D spotSz, final Int2D imgSz, final Int2D objSz){
+    public static Point correctMaxObjectSize(final Point spotSz, final Point imgSz, final Point objSz){
         // if both object dimensions are too small then cascade window size is used
         if(objSz.x <= spotSz.x && objSz.y <= spotSz.y) return spotSz;
 

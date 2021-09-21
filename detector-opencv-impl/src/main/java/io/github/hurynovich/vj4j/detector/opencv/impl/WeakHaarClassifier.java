@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -10,7 +10,7 @@ public class WeakHaarClassifier {
     private double rightValue;
     private HaarFeature feature;
 
-    public double calcValue(IntegralImg image, double valueFactor, Int2D shift){
+    public double calcValue(IntegralImg image, double valueFactor, Point shift){
         return (feature.calcValue(image, shift) * valueFactor < threshold) ? leftValue : rightValue;
     }
 }

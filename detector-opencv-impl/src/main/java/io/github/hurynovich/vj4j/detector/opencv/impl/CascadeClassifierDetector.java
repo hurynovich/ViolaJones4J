@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.Int2D;
+import io.github.hurynovich.vj4j.detector.api.Point;
 import io.github.hurynovich.vj4j.detector.api.Rect;
 import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.opencv.impl.util.AwtImageWrapper;
@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.hurynovich.vj4j.detector.api.Int2D.int2D;
+import static io.github.hurynovich.vj4j.detector.api.Point.pointOf;
 import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMaxObjectSize;
 
 @AllArgsConstructor
@@ -22,8 +22,8 @@ public class CascadeClassifierDetector implements Detector {
     public List<Rect> detect(BufferedImage orgImg, Settings settings) {
         final var img = new AwtImageWrapper(orgImg);
         final var spotSz = cascade.getWindowSize();
-        final var imgSz = int2D(img.getWidth(), img.getHeight());
-        final var minObjSz = int2D(40, 40);
+        final var imgSz = pointOf(img.getWidth(), img.getHeight());
+        final var minObjSz = pointOf(40, 40);
         final var maxObjSz = correctMaxObjectSize(spotSz, imgSz, imgSz).divide(4);
         final int minSections = 3;
         final double minOverlap = 10.0;
@@ -32,7 +32,7 @@ public class CascadeClassifierDetector implements Detector {
         ScaleSlider scaleItr = new ScaleSlider(spotSz, minObjSz, maxObjSz, 1.1);
         while (scaleItr.hasNext()){
             double scale = scaleItr.next();
-            Int2D scaledImgSz = imgSz.divide(scale);
+            Point scaledImgSz = imgSz.divide(scale);
             var scaledImg = AwtImageWrapper.scale(img, scaledImgSz);
             applyCascade(scaledImg, scale, result);
         }
@@ -43,9 +43,9 @@ public class CascadeClassifierDetector implements Detector {
     private void applyCascade(AwtImageWrapper img, double scale, List<Rect> result) {
         IntegralImg ii = IntegralImg.newIntegralImg(img);
         IntegralImg sqIi = IntegralImg.newSquaredIntegralImg(img);
-        PositionSlider slider = new PositionSlider(new Int2D(img.getWidth(), img.getHeight()), cascade.getWindowSize());
+        PositionSlider slider = new PositionSlider(new Point(img.getWidth(), img.getHeight()), cascade.getWindowSize());
 
-        Int2D spotPos;
+        Point spotPos;
         while ((spotPos = slider.next()) != null) {
             double valueFactor = calcValueFactor(ii, sqIi, spotPos, cascade.getWindowSize());
             if(cascade.detect(ii, valueFactor, spotPos)) {
@@ -57,7 +57,7 @@ public class CascadeClassifierDetector implements Detector {
         }
     }
 
-    private double calcValueFactor(IntegralImg ii, IntegralImg sqIi, Int2D spotPos, Int2D spotSz) {
+    private double calcValueFactor(IntegralImg ii, IntegralImg sqIi, Point spotPos, Point spotSz) {
         var inside = new Rect(
                 spotPos.x + 1,
                 spotPos.y + 1,

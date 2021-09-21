@@ -12,12 +12,12 @@ import static java.lang.Math.min;
 @Getter
 //TODO think to rename as Rectangle
 public final class Rect {
-    public final Int2D a;
-    public final Int2D b;
+    public final Point a;
+    public final Point b;
 
     public Rect(int x1, int y1, int x2, int y2){
-        a = new Int2D(x1, y1);
-        b = new Int2D(x2, y2);
+        a = new Point(x1, y1);
+        b = new Point(x2, y2);
     }
 
     public int area(){
@@ -32,7 +32,7 @@ public final class Rect {
         return sb.toString();
     }
 
-    public Rect translate(Int2D shift) {
+    public Rect translate(Point shift) {
         return new Rect(a.plus(shift), b.plus(shift));
     }
 
