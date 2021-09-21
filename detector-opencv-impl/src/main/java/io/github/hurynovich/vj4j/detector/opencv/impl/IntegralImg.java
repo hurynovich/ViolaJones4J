@@ -1,9 +1,9 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
+import io.github.hurynovich.vj4j.commons.Utils;
 import io.github.hurynovich.vj4j.detector.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Point;
 import io.github.hurynovich.vj4j.detector.api.Rect;
-import io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils;
 
 import java.util.function.IntUnaryOperator;
 

@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv.impl.util;
+package io.github.hurynovich.vj4j.commons;
 
 import io.github.hurynovich.vj4j.detector.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Point;
@@ -30,15 +30,11 @@ public final class AwtImageWrapper implements Image {
         return source.getHeight();
     }
 
-    public static AwtImageWrapper scale(AwtImageWrapper sourceImg, int targetWidth, int targetHeight){
-        BufferedImage resized = new BufferedImage(targetWidth, targetHeight, TYPE_INT_RGB);
+    public Image scale(Point targetSz){
+        BufferedImage resized = new BufferedImage(targetSz.x, targetSz.y, TYPE_INT_RGB);
         Graphics2D graphics2D = resized.createGraphics();
-        graphics2D.drawImage(sourceImg.source, 0, 0, targetWidth, targetHeight, null);
+        graphics2D.drawImage(this.source, 0, 0, targetSz.x, targetSz.y, null);
         graphics2D.dispose();
         return new AwtImageWrapper(resized);
-    }
-
-    public static AwtImageWrapper scale(AwtImageWrapper img, Point targetSize) {
-        return scale(img, targetSize.x, targetSize.y);
     }
 }

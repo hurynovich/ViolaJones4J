@@ -1,6 +1,7 @@
 package io.github.hurynovich.vj4j.detector.cli;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
+import io.github.hurynovich.vj4j.detector.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
 import io.github.hurynovich.vj4j.detector.api.Rect;
@@ -9,12 +10,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
@@ -75,7 +71,7 @@ public class DetectorApp implements Callable<Integer> {
 
         log.log(DEBUG, "Start detecting objects.");
 
-        BufferedImage srcImg = loadImage(imageFile);
+        Image srcImg = readImage(imageFile);
         final var result = d.detect(srcImg, new Settings(){});
         if(!result.isEmpty()) {
             log.log(DEBUG, "{} objects were detected.", result.size());
@@ -92,10 +88,10 @@ public class DetectorApp implements Callable<Integer> {
         } else if(outputFormat == IMAGE) {
             log.log(DEBUG, "Storing {} result.", IMAGE);
             for (Rect rect : result) {
-                drawRectangle(srcImg, rect, Color.RED);
+                drawRectangle(srcImg, rect);
             }
             File targetFile = new File(imageFile.getParent(), "detect_" + imageFile.getName());
-            storeImageResult(srcImg, targetFile);
+            writeImage(srcImg, targetFile);
         }
         log.log(DEBUG, "Result was stored.");
 
@@ -108,26 +104,14 @@ public class DetectorApp implements Callable<Integer> {
         return loader.findFirst().orElseThrow().load(cascadeFile);
     }
 
-    private static BufferedImage loadImage(File path) {
+    private static Image readImage(File path) {
         if(!path.exists()) throw new RuntimeException("Image file '" + path.getAbsolutePath() + "' was not found.");
-        //TODO
-        try {
-            return ImageIO.read(path);
-        } catch (IOException e) {
-            //TODO
-            throw new RuntimeException();
-        }
+        //TODO implement
+        return null;
     }
 
-    private static void storeImageResult(BufferedImage img, File path) {
-
-        //TODO
-        try {
-            ImageIO.write(img, "jpg", path);
-        } catch (IOException e) {
-            //TODO
-            throw new RuntimeException();
-        }
+    private static void writeImage(Image img, File path) {
+        //TODO implement
     }
 
     public static void main(String[] args) {
@@ -136,18 +120,19 @@ public class DetectorApp implements Callable<Integer> {
         System.exit(exitCode);
     }
 
-    public static void drawRectangle(BufferedImage img, Rect rectangle, Color drawColor) {
-        Graphics g = img.getGraphics();
-        g.setColor(drawColor);
-
-        int x1 = rectangle.getA().x;
-        int y1 = rectangle.getA().y;
-        int x2 = rectangle.getB().x;
-        int y2 = rectangle.getB().y;
-
-        g.drawLine(x1, y1, x2, y1);
-        g.drawLine(x2, y1, x2, y2);
-        g.drawLine(x2, y2, x1, y2);
-        g.drawLine(x1, y2, x1, y1);
+    public static void drawRectangle(Image img, Rect rectangle) {
+        //TODO implement
+//        Graphics g = img.getGraphics();
+//        g.setColor(drawColor);
+//
+//        int x1 = rectangle.getA().x;
+//        int y1 = rectangle.getA().y;
+//        int x2 = rectangle.getB().x;
+//        int y2 = rectangle.getB().y;
+//
+//        g.drawLine(x1, y1, x2, y1);
+//        g.drawLine(x2, y1, x2, y2);
+//        g.drawLine(x2, y2, x1, y2);
+//        g.drawLine(x1, y2, x1, y1);
     }
 }

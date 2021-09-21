@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.opencv.impl.util.AwtImageWrapper;
-import io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils;
+import io.github.hurynovich.vj4j.commons.Utils;
+import io.github.hurynovich.vj4j.commons.AwtImageWrapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

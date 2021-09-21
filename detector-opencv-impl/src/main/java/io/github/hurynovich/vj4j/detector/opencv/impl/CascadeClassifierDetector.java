@@ -1,30 +1,24 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.Point;
-import io.github.hurynovich.vj4j.detector.api.Rect;
-import io.github.hurynovich.vj4j.detector.api.Settings;
-import io.github.hurynovich.vj4j.detector.opencv.impl.util.AwtImageWrapper;
+import io.github.hurynovich.vj4j.commons.Utils;
+import io.github.hurynovich.vj4j.detector.api.*;
 import lombok.AllArgsConstructor;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.hurynovich.vj4j.detector.api.Point.pointOf;
-import static io.github.hurynovich.vj4j.detector.opencv.impl.util.Utils.correctMaxObjectSize;
 
 @AllArgsConstructor
 public class CascadeClassifierDetector implements Detector {
     private final CascadeClassifier cascade;
 
     @Override
-    public List<Rect> detect(BufferedImage orgImg, Settings settings) {
-        final var img = new AwtImageWrapper(orgImg);
+    public List<Rect> detect(Image orgImg, Settings settings) {
         final var spotSz = cascade.getWindowSize();
-        final var imgSz = pointOf(img.getWidth(), img.getHeight());
+        final var imgSz = pointOf(orgImg.getWidth(), orgImg.getHeight());
         final var minObjSz = pointOf(40, 40);
-        final var maxObjSz = correctMaxObjectSize(spotSz, imgSz, imgSz).divide(4);
+        final var maxObjSz = Utils.correctMaxObjectSize(spotSz, imgSz, imgSz).divide(4);
         final int minSections = 3;
         final double minOverlap = 10.0;
 
@@ -33,14 +27,14 @@ public class CascadeClassifierDetector implements Detector {
         while (scaleItr.hasNext()){
             double scale = scaleItr.next();
             Point scaledImgSz = imgSz.divide(scale);
-            var scaledImg = AwtImageWrapper.scale(img, scaledImgSz);
+            var scaledImg = orgImg.scale(scaledImgSz);
             applyCascade(scaledImg, scale, result);
         }
 
         return new SimpleRectMerger(minSections, minOverlap).merge(result);
     }
 
-    private void applyCascade(AwtImageWrapper img, double scale, List<Rect> result) {
+    private void applyCascade(Image img, double scale, List<Rect> result) {
         IntegralImg ii = IntegralImg.newIntegralImg(img);
         IntegralImg sqIi = IntegralImg.newSquaredIntegralImg(img);
         PositionSlider slider = new PositionSlider(new Point(img.getWidth(), img.getHeight()), cascade.getWindowSize());

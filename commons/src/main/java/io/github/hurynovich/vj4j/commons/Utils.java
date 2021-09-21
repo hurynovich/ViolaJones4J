@@ -1,4 +1,4 @@
-package io.github.hurynovich.vj4j.detector.opencv.impl.util;
+package io.github.hurynovich.vj4j.commons;
 
 import io.github.hurynovich.vj4j.detector.api.Point;
 
