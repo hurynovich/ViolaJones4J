@@ -1,7 +1,7 @@
 package io.github.hurynovich.vj4j.commons;
 
-import io.github.hurynovich.vj4j.detector.api.Image;
-import io.github.hurynovich.vj4j.detector.api.Point;
+import io.github.hurynovich.vj4j.core.api.Image;
+import io.github.hurynovich.vj4j.core.api.Point;
 
 //TODO experimental class
 @Deprecated(forRemoval = false)

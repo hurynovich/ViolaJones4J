@@ -1,12 +1,12 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.commons.Rect;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.hurynovich.vj4j.detector.api.Rect.rect;
+import static io.github.hurynovich.vj4j.commons.Rect.rect;
 import static java.lang.Math.round;
 
 class RectGroup {

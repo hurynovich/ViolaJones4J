@@ -1,5 +1,6 @@
 package io.github.hurynovich.vj4j.detector.api;
 
+import io.github.hurynovich.vj4j.core.api.Point;
 import lombok.Data;
 
 @Data

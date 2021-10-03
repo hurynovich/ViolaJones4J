@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
-import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.commons.Rect;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,15 +8,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static io.github.hurynovich.vj4j.detector.api.Rect.intersection;
-import static io.github.hurynovich.vj4j.detector.api.Rect.rect;
+import static io.github.hurynovich.vj4j.commons.Rect.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RectTest {
     @Test
     void testToString(){
-        Rect r = new Rect(1,2, 3, 4);
+        Rect r = new Rect(1, 2, 3, 4);
         assertEquals("[(1, 2), (3, 4)]", r.toString());
     }
 

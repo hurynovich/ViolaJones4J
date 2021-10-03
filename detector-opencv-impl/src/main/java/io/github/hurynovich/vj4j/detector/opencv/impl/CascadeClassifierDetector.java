@@ -1,20 +1,24 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
+import io.github.hurynovich.vj4j.commons.Rect;
 import io.github.hurynovich.vj4j.commons.Utils;
-import io.github.hurynovich.vj4j.detector.api.*;
+import io.github.hurynovich.vj4j.commons.Point;
+import io.github.hurynovich.vj4j.detector.api.Detector;
+import io.github.hurynovich.vj4j.core.api.Image;
+import io.github.hurynovich.vj4j.detector.api.Settings;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.hurynovich.vj4j.detector.api.Point.pointOf;
+import static io.github.hurynovich.vj4j.commons.Point.pointOf;
 
 @AllArgsConstructor
 public class CascadeClassifierDetector implements Detector {
     private final CascadeClassifier cascade;
 
     @Override
-    public List<Rect> detect(Image orgImg, Settings settings) {
+    public List<? extends io.github.hurynovich.vj4j.core.api.Rect> detect(Image orgImg, Settings settings) {
         final var spotSz = cascade.getWindowSize();
         final var imgSz = pointOf(orgImg.getWidth(), orgImg.getHeight());
         final var minObjSz = pointOf(40, 40);
@@ -22,16 +26,16 @@ public class CascadeClassifierDetector implements Detector {
         final int minSections = 3;
         final double minOverlap = 10.0;
 
-        List<Rect> result = new ArrayList<>();
+        List<Rect> allAreas = new ArrayList<>();
         ScaleSlider scaleItr = new ScaleSlider(spotSz, minObjSz, maxObjSz, 1.1);
         while (scaleItr.hasNext()){
             double scale = scaleItr.next();
             Point scaledImgSz = imgSz.divide(scale);
             var scaledImg = orgImg.scale(scaledImgSz);
-            applyCascade(scaledImg, scale, result);
+            applyCascade(scaledImg, scale, allAreas);
         }
 
-        return new SimpleRectMerger(minSections, minOverlap).merge(result);
+        return new SimpleRectMerger(minSections, minOverlap).merge(allAreas);
     }
 
     private void applyCascade(Image img, double scale, List<Rect> result) {

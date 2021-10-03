@@ -1,7 +1,6 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.commons.Utils;
-import io.github.hurynovich.vj4j.commons.AwtImageWrapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +9,12 @@ import java.awt.image.BufferedImage;
 
 
 public class IntegralImgImplTest {
+    //FIXME
+    /*
     @Test
     @Disabled
     void testImageReading() throws Exception {
-        BufferedImage img = ImageIO.read(IntegralImgImplTest.class.getResourceAsStream("/test-image.png"));
+//        BufferedImage img = ImageIO.read(IntegralImgImplTest.class.getResourceAsStream("/test-image.png"));
 
         int x, y = 0;
         while (y < img.getHeight()) {
@@ -89,4 +90,5 @@ public class IntegralImgImplTest {
 
         System.out.println(ii.getSum(0, 1, 1, 2));
     }
+    */
 }

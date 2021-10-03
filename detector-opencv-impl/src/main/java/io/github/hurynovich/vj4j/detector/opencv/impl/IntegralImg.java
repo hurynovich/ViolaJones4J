@@ -1,9 +1,9 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.commons.Utils;
-import io.github.hurynovich.vj4j.detector.api.Image;
-import io.github.hurynovich.vj4j.detector.api.Point;
-import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.core.api.Image;
+import io.github.hurynovich.vj4j.commons.Point;
+import io.github.hurynovich.vj4j.commons.Rect;
 
 import java.util.function.IntUnaryOperator;
 
@@ -37,8 +37,11 @@ public class IntegralImg {
     public int getWidth(){return width;}
     public int getHigh(){return height;}
 
+    //TODO implement
+    IntegralImg(Image img, Point targetSz, IntUnaryOperator pixelValCalculator){
+        final double scaleX = ((double)img.getWidth()) / targetSz.x;
+        final double scaleY = ((double)img.getHeight()) / targetSz.y;
 
-    IntegralImg(Image img, IntUnaryOperator pixelValCalculator){
         //allocate array to store integral image
         width = img.getWidth() + 1;
         height = img.getHeight() + 1;
@@ -46,6 +49,31 @@ public class IntegralImg {
         for(int i = 0; i < data.length; i++){
             data[i] = new int[width];
         }
+
+        //initialize first row and first column of integral image
+        data[1][1] = pixelValCalculator.applyAsInt(img.getRGB(0, 0));
+        for (int x = 1; x < width; x++){
+            data[1][x] = data[1][x - 1] + pixelValCalculator.applyAsInt(img.getRGB(x - 1, 0));
+        }
+        for (int y = 1; y < height; y++){
+            data[y][1] = data[y - 1][1] + pixelValCalculator.applyAsInt(img.getRGB(0, y - 1));
+        }
+
+        //initialize the rest of integral image
+        for (int y = 1; y < height - 1; y++){
+            int rowSum = pixelValCalculator.applyAsInt(img.getRGB(0, y));
+            for (int x = 1; x < width - 1; x++){
+                rowSum += pixelValCalculator.applyAsInt(img.getRGB(x, y));
+                data[y+1][x+1] = data[y][x+1] + rowSum;
+            }
+        }
+    }
+
+    IntegralImg(Image img, IntUnaryOperator pixelValCalculator){
+        //allocate array to store integral image
+        width = img.getWidth() + 1;
+        height = img.getHeight() + 1;
+        data = new int[height][width];
 
         //initialize first row and first column of integral image
         data[1][1] = pixelValCalculator.applyAsInt(img.getRGB(0, 0));

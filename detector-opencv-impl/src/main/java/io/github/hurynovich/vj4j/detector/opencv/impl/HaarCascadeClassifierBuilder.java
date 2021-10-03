@@ -1,8 +1,8 @@
 package io.github.hurynovich.vj4j.detector.opencv.impl;
 
 import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.Point;
-import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.commons.Point;
+import io.github.hurynovich.vj4j.commons.Rect;
 import lombok.Setter;
 
 import java.util.ArrayList;

@@ -10,7 +10,7 @@ import static java.lang.Math.round;
 @EqualsAndHashCode
 @AllArgsConstructor
 //TODO think to rename as Point
-public final class Point implements io.github.hurynovich.vj4j.detector.api.Point {
+public final class Point implements io.github.hurynovich.vj4j.core.api.Point {
 
     public static final Point ZERO = pointOf(0, 0);
 

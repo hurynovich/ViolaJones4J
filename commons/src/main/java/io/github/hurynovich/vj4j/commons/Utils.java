@@ -1,7 +1,5 @@
 package io.github.hurynovich.vj4j.commons;
 
-import io.github.hurynovich.vj4j.detector.api.Image;
-
 import static java.lang.Math.round;
 
 public final class Utils {

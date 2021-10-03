@@ -11,7 +11,7 @@ import static java.lang.Math.min;
 @EqualsAndHashCode
 @Getter
 //TODO think to rename as Rectangle
-public final class Rect implements io.github.hurynovich.vj4j.detector.api.Rect {
+public final class Rect implements io.github.hurynovich.vj4j.core.api.Rect {
     public final Point a;
     public final Point b;
 
