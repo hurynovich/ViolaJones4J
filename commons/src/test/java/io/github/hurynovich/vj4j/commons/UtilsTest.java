@@ -1,6 +1,5 @@
 package io.github.hurynovich.vj4j.commons;
 
-import io.github.hurynovich.vj4j.detector.api.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static io.github.hurynovich.vj4j.commons.Utils.*;
-import static io.github.hurynovich.vj4j.detector.api.Point.pointOf;
+import static io.github.hurynovich.vj4j.commons.Point.pointOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilsTest {

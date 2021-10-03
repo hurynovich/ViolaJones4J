@@ -1,6 +1,6 @@
 package io.github.hurynovich.vj4j.commons;
 
-import io.github.hurynovich.vj4j.detector.api.Point;
+import io.github.hurynovich.vj4j.detector.api.Image;
 
 import static java.lang.Math.round;
 
@@ -37,6 +37,7 @@ public final class Utils {
         if(objSz.x <= spotSz.x || objSz.y <= spotSz.y) return spotSz;
 
         //object width or height must not be less than corresponding cascade window width or height
+        //FIXME
         double x = Math.max(spotSz.x, objSz.x);
         double y = Math.max(spotSz.y, objSz.y);
 
