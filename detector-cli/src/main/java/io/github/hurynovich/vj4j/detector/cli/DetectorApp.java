@@ -1,10 +1,11 @@
 package io.github.hurynovich.vj4j.detector.cli;
 
+import io.github.hurynovich.vj4i.image.api.ImageEditor;
 import io.github.hurynovich.vj4j.detector.api.Detector;
-import io.github.hurynovich.vj4j.detector.api.Image;
+import io.github.hurynovich.vj4j.core.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Settings;
 import io.github.hurynovich.vj4j.detector.spi.DetectorLoader;
-import io.github.hurynovich.vj4j.detector.api.Rect;
+import io.github.hurynovich.vj4j.core.api.Rect;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
@@ -14,10 +15,13 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ServiceLoader;
 import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 import static io.github.hurynovich.vj4j.detector.cli.OutputFormat.IMAGE;
 import static io.github.hurynovich.vj4j.detector.cli.OutputFormat.TEXT;
 
+import static java.lang.System.Logger.Level.ALL;
 import static java.lang.System.Logger.Level.DEBUG;
 
 @CommandLine.Command(
@@ -65,19 +69,21 @@ public class DetectorApp implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        log.log(DEBUG, "Start loading detector.");
+        log.log(DEBUG, "Loading detector...");
         Detector d = loadDetector();
         log.log(DEBUG, "Detector '{}' was loaded.", d.getClass());
 
-        log.log(DEBUG, "Start detecting objects.");
 
+        log.log(DEBUG, "Reading image...");
         Image srcImg = readImage(imageFile);
+
+        log.log(DEBUG, "Detecting objects...");
         final var result = d.detect(srcImg, new Settings(){});
         if(!result.isEmpty()) {
             log.log(DEBUG, "{} objects were detected.", result.size());
         } else {
-            log.log(DEBUG, "Objects were not detected.");
-            return 0;
+            log.log(DEBUG, "No objects were detected.");
+            return ExitCodes.OK;
         }
 
         if(outputFormat == TEXT) {
@@ -104,10 +110,18 @@ public class DetectorApp implements Callable<Integer> {
         return loader.findFirst().orElseThrow().load(cascadeFile);
     }
 
+    private static ImageEditor loadEditor() {
+        //TODO implement finding certain editor instead of first
+        var loader = ServiceLoader.load(ImageEditor.class);
+        return loader.findFirst().orElseThrow();
+    }
+
     private static Image readImage(File path) {
         if(!path.exists()) throw new RuntimeException("Image file '" + path.getAbsolutePath() + "' was not found.");
-        //TODO implement
-        return null;
+
+        //TODO
+        ImageEditor ed = loadEditor();
+        return ed.read(path.toPath());
     }
 
     private static void writeImage(Image img, File path) {
@@ -115,6 +129,11 @@ public class DetectorApp implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
+        var rootLog = LogManager.getLogManager().getLogger("");
+        rootLog.setLevel(Level.ALL);
+        for (var h : rootLog.getHandlers()) {
+            h.setLevel(Level.ALL);
+        }
         CommandLine cmd = new CommandLine(new DetectorApp());
         int exitCode = cmd.execute(args);
         System.exit(exitCode);
