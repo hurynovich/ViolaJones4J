@@ -55,8 +55,12 @@ public class ImageEditorImpl implements ImageEditor {
 
     @Override
     public Image scale(Image source, int targetWidth, int targetHeight) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented");
+        var data = getData(source);
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, data.getType());
+        Graphics2D graphics2D = resizedImage.createGraphics();
+        graphics2D.drawImage(data, 0, 0, targetWidth, targetHeight, null);
+        graphics2D.dispose();
+        return new ImageImpl(resizedImage);
     }
 
     @Override
