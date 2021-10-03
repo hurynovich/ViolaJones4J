@@ -1,9 +1,7 @@
 package io.github.hurynovich.vj4i.image.awt.impl;
 
 import io.github.hurynovich.vj4j.core.api.Image;
-import io.github.hurynovich.vj4j.core.api.Point;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
@@ -33,15 +31,6 @@ class ImageImpl implements Image {
     @Override
     public int getHeight() {
         return data.getHeight();
-    }
-
-    @Override
-    public Image scale(Point targetSz) {
-        BufferedImage resizedImage = new BufferedImage(targetSz.getX(), targetSz.getY(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = resizedImage.createGraphics();
-        graphics2D.drawImage(data, 0, 0, targetSz.getX(), targetSz.getY(), null);
-        graphics2D.dispose();
-        return new ImageImpl(resizedImage);
     }
 
     BufferedImage getData() {

@@ -15,4 +15,5 @@ public interface ImageEditor {
     Image newImage(int width, int height);
     Image scale(Image image, int targetWidth, int targetHeight);
     void drawLine(Image image, int x1, int y1, int x2, int y2, int color);
+    boolean canEdit(Image source);
 }

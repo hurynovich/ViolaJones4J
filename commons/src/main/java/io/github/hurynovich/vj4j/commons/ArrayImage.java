@@ -34,9 +34,4 @@ public class ArrayImage implements Image {
     public int getHeight() {
         return data.length;
     }
-
-    @Override
-    public Image scale(Point targetSz) {
-        return null;
-    }
 }

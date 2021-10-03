@@ -6,6 +6,7 @@ import io.github.hurynovich.vj4j.commons.Point;
 import io.github.hurynovich.vj4j.detector.api.Detector;
 import io.github.hurynovich.vj4j.core.api.Image;
 import io.github.hurynovich.vj4j.detector.api.Settings;
+import io.github.hurynovich.vj4j.detector.opencv.impl.util.ImageUtils;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class CascadeClassifierDetector implements Detector {
         while (scaleItr.hasNext()){
             double scale = scaleItr.next();
             Point scaledImgSz = imgSz.divide(scale);
-            var scaledImg = orgImg.scale(scaledImgSz);
+            //TODO scale scaled image may be faster
+            Image scaledImg = ImageUtils.scale(orgImg, scaledImgSz);
             applyCascade(scaledImg, scale, allAreas);
         }
 

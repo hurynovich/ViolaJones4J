@@ -38,8 +38,13 @@ public class ImageEditorImpl implements ImageEditor {
 
     @Override
     public void write(Image img, Path target) {
-        //TODO
-        throw new UnsupportedOperationException("Not implemented");
+        var data = getData(img);
+        try {
+            ImageIO.write(data, "jpg", target.toFile());
+        } catch (IOException e) {
+            //TODO use custom exception
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -77,5 +82,10 @@ public class ImageEditorImpl implements ImageEditor {
             //TODO use custom exception and give better message
             throw new RuntimeException("This image instance is not compatible with this editor.");
         }
+    }
+
+    @Override
+    public boolean canEdit(Image image) {
+        return image instanceof ImageImpl;
     }
 }
