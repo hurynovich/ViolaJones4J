@@ -6,4 +6,6 @@ include("detector-opencv-impl")
 
 include("trainer-api")
 include("commons")
+include("image-processor-api")
+include("image-processor-awt-impl")
 include("core-api")
