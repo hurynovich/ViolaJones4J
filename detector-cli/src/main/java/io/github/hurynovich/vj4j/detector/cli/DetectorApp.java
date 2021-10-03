@@ -125,7 +125,8 @@ public class DetectorApp implements Callable<Integer> {
     }
 
     private static void writeImage(Image img, File path) {
-        //TODO implement
+        var editor = loadEditor();
+        editor.write(img, path.toPath());
     }
 
     public static void main(String[] args) {
@@ -140,18 +141,16 @@ public class DetectorApp implements Callable<Integer> {
     }
 
     public static void drawRectangle(Image img, Rect rectangle) {
-        //TODO implement
-//        Graphics g = img.getGraphics();
-//        g.setColor(drawColor);
-//
-//        int x1 = rectangle.getA().x;
-//        int y1 = rectangle.getA().y;
-//        int x2 = rectangle.getB().x;
-//        int y2 = rectangle.getB().y;
-//
-//        g.drawLine(x1, y1, x2, y1);
-//        g.drawLine(x2, y1, x2, y2);
-//        g.drawLine(x2, y2, x1, y2);
-//        g.drawLine(x1, y2, x1, y1);
+        var g = loadEditor();
+        int x1 = rectangle.getA().getX();
+        int y1 = rectangle.getA().getY();
+        int x2 = rectangle.getB().getX();
+        int y2 = rectangle.getB().getY();
+
+        int red = 255 << 16;
+        g.drawLine(img, x1, y1, x2, y1, red);
+        g.drawLine(img, x2, y1, x2, y2, red);
+        g.drawLine(img, x2, y2, x1, y2, red);
+        g.drawLine(img, x1, y2, x1, y1, red);
     }
 }
