@@ -9,6 +9,7 @@ java {
 
 dependencies {
     implementation(project(":detector-api"))
+    implementation(project(":core-api"))
     implementation(project(":commons"))
 
     compileOnly(DepsCatalog.lombok)

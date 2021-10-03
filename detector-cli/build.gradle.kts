@@ -15,6 +15,7 @@ application {
 
 dependencies {
     implementation(project(":detector-api"))
+    implementation(project(":image-processor-api"))
     runtimeOnly(project(":detector-opencv-impl"))
 
     implementation(DepsCatalog.picocli)

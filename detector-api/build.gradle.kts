@@ -8,14 +8,8 @@ java {
 }
 
 dependencies {
+    api(project(":core-api"))
+
     compileOnly(DepsCatalog.lombok)
     annotationProcessor(DepsCatalog.lombok)
-
-    testImplementation(DepsCatalog.junitApi)
-    testRuntimeOnly(DepsCatalog.junitEngine)
-}
-
-val test by tasks.getting(Test::class) {
-    // Use junit platform for unit tests
-    useJUnitPlatform()
 }
