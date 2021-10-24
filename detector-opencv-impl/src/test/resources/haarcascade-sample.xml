@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<opencv_storage
+        xmlns="cascade-classifier"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="cascade-classifier cascade-classifier-schema.xsd"
+>
+    <cascade type_id="opencv-cascade-classifier">
+        <stageType>BOOST</stageType>
+        <featureType>HAAR</featureType>
+        <height>20</height>
+        <width>20</width>
+        <stageParams>
+            <maxWeakCount>93</maxWeakCount>
+        </stageParams>
+        <featureParams>
+            <maxCatCount>0</maxCatCount>
+        </featureParams>
+        <stageNum>24</stageNum>
+        <stages>
+            <_>
+                <maxWeakCount>6</maxWeakCount>
+                <stageThreshold>-1.4562760591506958e+00</stageThreshold>
+                <weakClassifiers>
+                    <_>
+                        <internalNodes>
+                            0 -1 0 1.2963959574699402e-01
+                        </internalNodes>
+                        <leafValues>
+                            -7.7304208278656006e-01 6.8350148200988770e-01
+                        </leafValues>
+                    </_>
+                    <_>
+                        <internalNodes>
+                            0 -1 1 -4.6326808631420135e-02
+                        </internalNodes>
+                        <leafValues>
+                            5.7352751493453979e-01 -4.9097689986228943e-01
+                        </leafValues>
+                    </_>
+                </weakClassifiers>
+            </_>
+            <_>
+                <maxWeakCount>12</maxWeakCount>
+                <stageThreshold>-1.2550230026245117e+00</stageThreshold>
+                <weakClassifiers>
+                    <_>
+                        <internalNodes>
+                            0 -1 6 -2.1727620065212250e-01
+                        </internalNodes>
+                        <leafValues>
+                            7.1098899841308594e-01 -5.9360730648040771e-01
+                        </leafValues>
+                    </_>
+                    <_>
+                        <internalNodes>
+                            0 -1 7 1.2071969918906689e-02
+                        </internalNodes>
+                        <leafValues>
+                            -2.8240481019020081e-01 5.9013551473617554e-01
+                        </leafValues>
+                    </_>
+                </weakClassifiers>
+            </_>
+        </stages>
+        <features>
+            <_>
+                <rects>
+                    <_>
+                        0 8 20 12 -1.
+                    </_>
+                    <_>
+                        0 14 20 6 2.
+                    </_>
+                </rects>
+            </_>
+            <_>
+                <rects>
+                    <_>
+                        9 1 4 15 -1.
+                    </_>
+                    <_>
+                        9 6 4 5 3.
+                    </_>
+                </rects>
+            </_>
+        </features>
+    </cascade>
+</opencv_storage>
