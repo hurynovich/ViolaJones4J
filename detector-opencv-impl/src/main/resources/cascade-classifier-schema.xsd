@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+
+-->
 <xs:schema
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:ocv="cascade-classifier"
@@ -22,12 +25,12 @@
     <xs:complexType name="cascade">
         <xs:annotation>
             <xs:documentation>
-                Contains object detection cascade.
+                Contains object detection cascade classifier.
             </xs:documentation>
         </xs:annotation>
 
         <xs:sequence>
-            <xs:element name="stageType" type="xs:string" >
+            <xs:element name="stageType" type="ocv:stageType" >
                 <xs:annotation>
                     <xs:documentation>
                         Defines algorithm used for this cascade.
@@ -39,11 +42,17 @@
             <xs:element name="width" type="xs:positiveInteger" />
             <xs:element name="stageParams" type="ocv:stageParams" />
             <xs:element name="featureParams" type="ocv:featureParams" />
-            <xs:element name="stageNum" type="xs:positiveInteger" />
+            <xs:element name="stageNum" type="xs:positiveInteger" >
+                <xs:annotation>
+                    <xs:documentation>
+                        Number of stages in this cascade classifier.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
             <xs:element name="stages" type="ocv:stages" />
             <xs:element name="features" type="ocv:features" />
         </xs:sequence>
-        <xs:attribute name="type_id" />
+        <xs:attribute name="type_id" type="ocv:cascadeClassifier" />
     </xs:complexType>
 
     <xs:complexType name="stageParams">
@@ -59,16 +68,42 @@
     </xs:complexType>
 
     <xs:complexType name="stages">
+        <xs:annotation>
+            <xs:documentation>
+                Container for stage elements.
+                Order of stages is relevant.
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element maxOccurs="unbounded" name="_" type="ocv:stage" />
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="stage">
+        <xs:annotation>
+            <xs:documentation>
+                Single stage in classifier.
+                Here "stage" is synonym of "cascade" or "strong classifier".
+            </xs:documentation>
+        </xs:annotation>
+
         <xs:sequence>
-            <xs:element name="maxWeakCount" type="xs:positiveInteger" />
-            <xs:element name="stageThreshold" />
-            <xs:element name="weakClassifiers" type="ocv:weakClassifiers" />
+            <xs:element name="maxWeakCount" type="xs:positiveInteger">
+                <xs:annotation>
+                    <xs:documentation>
+                        Number of weak classifiers in this stage.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="stageThreshold" type="xs:double" />
+            <xs:element name="weakClassifiers" type="ocv:weakClassifiers" >
+                <xs:annotation>
+                    <xs:documentation>
+                        Container of weak classifier elements.
+                        Order of weak classifiers is not relevant.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
@@ -86,12 +121,25 @@
     </xs:complexType>
 
     <xs:complexType name="features">
+        <xs:annotation>
+            <xs:documentation>
+                Container of feature elements.
+                Order of features is relevant.
+            </xs:documentation>
+        </xs:annotation>
+
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="_" type="ocv:feature" />
+            <xs:element maxOccurs="unbounded" name="_" type="ocv:haarFeature" />
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="feature">
+    <xs:complexType name="haarFeature">
+        <xs:annotation>
+            <xs:documentation>
+
+            </xs:documentation>
+        </xs:annotation>
+
         <xs:sequence>
             <xs:element name="rects" type="ocv:rects" />
         </xs:sequence>
@@ -132,6 +180,20 @@
     <xs:simpleType name="featureType">
         <xs:restriction>
             <xs:enumeration value="HAAR" />
+            <xs:enumeration value="LBP" />
+            <xs:enumeration value="HOG" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="stageType">
+        <xs:restriction>
+            <xs:enumeration value="BOOST" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="cascadeClassifier">
+        <xs:restriction>
+            <xs:enumeration value="opencv-cascade-classifier" />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
