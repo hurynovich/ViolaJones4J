@@ -12,3 +12,5 @@ include("detector-opencv-impl")
 include("detector-swing-gui")
 
 include("trainer-api")
+include("trainer-opencv-impl")
+include("trainer-cli")
