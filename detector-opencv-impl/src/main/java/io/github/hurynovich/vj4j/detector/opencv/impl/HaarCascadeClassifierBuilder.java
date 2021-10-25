@@ -68,8 +68,8 @@ public final class HaarCascadeClassifierBuilder {
         features.add(currentFeature);
     }
 
-    public void addFeaturePart(int x1, int y1, int x2, int y2, double factor) {
-        HaarFeature.Part part = new HaarFeature.Part(new Rect(x1, y1, x1 + x2, y1 + y2), factor);
+    public void addFeaturePart(int x, int y, int w, int h, double factor) {
+        HaarFeature.Part part = new HaarFeature.Part(new Rect(x, y, x + w, y + h), factor);
         currentFeature.parts.add(part);
     }
 
