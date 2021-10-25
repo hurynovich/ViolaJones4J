@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-        version="1.0"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:ocv="cascade-classifier"
+        version="1.0"
         targetNamespace="cascade-classifier"
         elementFormDefault="qualified"
 >
     <xs:element name="opencv_storage" type="ocv:root" />
 
     <xs:complexType name="root">
+        <xs:annotation>
+            <xs:documentation>
+                Top level element.
+            </xs:documentation>
+        </xs:annotation>
         <xs:sequence >
             <xs:element name="cascade" type="ocv:cascade" />
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="cascade">
+        <xs:annotation>
+            <xs:documentation>
+                Contains object detection cascade.
+            </xs:documentation>
+        </xs:annotation>
+
         <xs:sequence>
-            <xs:element name="stageType" type="xs:string" maxOccurs="1" />
-            <xs:element name="featureType" maxOccurs="1" />
-            <xs:element name="height" type="xs:positiveInteger" maxOccurs="1" />
-            <xs:element name="width" type="xs:positiveInteger" maxOccurs="1" />
-            <xs:element name="stageParams" type="ocv:stageParams" maxOccurs="1" />
-            <xs:element name="featureParams" type="ocv:featureParams" maxOccurs="1" />
+            <xs:element name="stageType" type="xs:string" >
+                <xs:annotation>
+                    <xs:documentation>
+                        Defines algorithm used for this cascade.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="featureType" type="ocv:featureType" />
+            <xs:element name="height" type="xs:positiveInteger" />
+            <xs:element name="width" type="xs:positiveInteger" />
+            <xs:element name="stageParams" type="ocv:stageParams" />
+            <xs:element name="featureParams" type="ocv:featureParams" />
             <xs:element name="stageNum" type="xs:positiveInteger" />
             <xs:element name="stages" type="ocv:stages" />
             <xs:element name="features" type="ocv:features" />
@@ -87,8 +104,34 @@
     </xs:complexType>
 
     <xs:simpleType name="rect">
+        <xs:annotation>
+            <xs:documentation>
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                    Holds data describing one rectangle within haar like feature. Its format is <strong>"x y w h f"</strong>.
+                    <br/>
+                    Where:
+                    <br/>
+                    <strong>x</strong>, <strong>y</strong> are base coordinates of the rectangle. They must be non negative integers since they reflect pixel position.
+                    Coordinates are relative to detector window.
+                    <br/>
+                    <strong>w</strong>, <strong>h</strong> are width (size by X axis) and height (size by Y axis) of the rectangle. They must be non negative integers since they relative reflect pixel positions.
+                    <br/>
+                    <strong>f</strong> is decimal factor (multiplier) for integral value of pixels covered by this rectangle. It can be any decimal value.
+                    <br/>
+                    Example:
+                    <br/>
+                    <tt>2 3 5 10 -1.0</tt>
+                </div>
+            </xs:documentation>
+        </xs:annotation>
         <xs:restriction>
+            <!-- TODO -->
+        </xs:restriction>
+    </xs:simpleType>
 
+    <xs:simpleType name="featureType">
+        <xs:restriction>
+            <xs:enumeration value="HAAR" />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
