@@ -9,3 +9,4 @@
 ## References
 * [OpenCV Object Detection](https://docs.opencv.org/4.5.4/d5/d54/group__objdetect.html)
 * [OpenCV Cascade files](https://github.com/opencv/opencv/tree/master/data)
+* [OpenCV traincascade is obsolete](https://github.com/opencv/opencv/issues/13231)
