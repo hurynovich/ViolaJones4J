@@ -18,7 +18,7 @@
         <stageNum>24</stageNum>
         <stages>
             <_>
-                <maxWeakCount>6</maxWeakCount>
+                <maxWeakCount>2</maxWeakCount>
                 <stageThreshold>-1.4562760591506958e+00</stageThreshold>
                 <weakClassifiers>
                     <_>
@@ -40,7 +40,7 @@
                 </weakClassifiers>
             </_>
             <_>
-                <maxWeakCount>12</maxWeakCount>
+                <maxWeakCount>2</maxWeakCount>
                 <stageThreshold>-1.2550230026245117e+00</stageThreshold>
                 <weakClassifiers>
                     <_>
