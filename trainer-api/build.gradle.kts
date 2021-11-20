@@ -1,5 +1,5 @@
 plugins {
-    java
+    `java-library`
 }
 
 java {
@@ -8,5 +8,5 @@ java {
 }
 
 dependencies {
-
+    api(project(":core-api"))
 }
