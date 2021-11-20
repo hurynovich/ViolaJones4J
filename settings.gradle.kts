@@ -10,6 +10,7 @@ include("detector-api")
 include("detector-cli")
 include("detector-opencv-impl")
 include("detector-swing-gui")
+include("detector-javafx-gui")
 
 include("trainer-api")
 include("trainer-opencv-impl")
