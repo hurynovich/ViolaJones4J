@@ -1,4 +1,8 @@
 # ViolaJones4J
+
+This is fun project implementing Viola-Jones object detection algorithm in Java.\
+Note it is __NOT production ready__ at least now.
+
 ![Face detection example](https://github.com/hurynovich/ViolaJones4J/blob/main/docs/img/solvay_faces_detection.jpg?raw=true)
 
 ## Technologies
