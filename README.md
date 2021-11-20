@@ -1,4 +1,5 @@
 # ViolaJones4J
+![Face detection example](https://github.com/hurynovich/ViolaJones4J/blob/main/docs/img/solvay_faces_detection.jpg?raw=true)
 
 ## Technologies
 * [Java module system](http://openjdk.java.net/projects/jigsaw/)
